@@ -1,0 +1,155 @@
+<!--
+  http://www.sitepoint.com/understanding-sql-joins-mysql-database/
+  http://blog.codinghorror.com/a-visual-explanation-of-sql-joins/
+  http://chartio.com/education/sql/joins
+  http://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins
+ -->
+<!DOCTYPE html>
+<html class="no-js" ng-app>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/JoinsCtrl.js"></script>
+
+  </head>
+  <body ng-controller="JoinsCtrl">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+
+    <div class="container">
+
+      <h1>Visual JOIN</h1>
+
+      <div class="row joins clearfix">
+        <div class="col-xs-3">
+          <div class="join" ng-class="currentJoinClass('inner')" ng-click="selectJoin('inner')">
+            <h2>INNER JOIN</h2>
+            <div class="subtitle">(or JOIN)</div>
+            <svg id="inner" viewBox="0 0 225 150" preserveAspectRatio="xMaxYmax"></svg>
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <div class="join" ng-class="currentJoinClass('left')" ng-click="selectJoin('left')">
+            <h2>LEFT JOIN</h2>
+            <div class="subtitle">&nbsp;</div>
+            <svg id="left" viewBox="0 0 225 150" preserveAspectRatio="xMaxYmax"></svg>
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <div class="join" ng-class="currentJoinClass('right')" ng-click="selectJoin('right')">
+            <h2>RIGHT JOIN</h2>
+            <div class="subtitle">&nbsp;</div>
+            <svg id="right" viewBox="0 0 225 150" preserveAspectRatio="xMaxYmax"></svg>
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <div class="join" ng-class="currentJoinClass('outer')" ng-click="selectJoin('outer')">
+            <h2>OUTER JOIN</h2>
+            <div class="subtitle">(with UNION)</div>
+            <svg id="outer" viewBox="0 0 225 150" preserveAspectRatio="xMaxYmax"></svg>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearfix lead">
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+        sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+        sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+        Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+        sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+        sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+      </div>
+
+
+      <div class="row tables">
+
+        <div class="col-sm-4" id="users">
+          <h3>Users</h3>
+          <table>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+            </tr>
+            <tr ng-class="isSelected(user.id)" ng-repeat="user in users">
+              <td>{{user.id}}</td>
+              <td>{{user.name}}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-sm-4">
+          <h3>JOIN</h3>
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Like</th>
+            </tr>
+            <tr ng-repeat="join in joins">
+              <td ng-class="{ 'is-null': (join.name == 'NULL') }">{{ join.name }}</td>
+              <td ng-class="{ 'is-null': (join.like == 'NULL') }">{{ join.like }}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-sm-4" id="likes">
+          <h3>Likes</h3>
+          <table>
+            <tr>
+              <th>User ID</th>
+              <th>Like</th>
+            </tr>
+            <tr ng-class="isSelected(like.user_id)" ng-repeat="like in likes">
+              <td>{{ like.user_id }}</td>
+              <td>{{ like.name }}</td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+
+
+
+      <div class="row footer">
+        <div class="col-xs-12">
+          <a href="http://spathon.com">Spathon</a>
+        </div>
+      </div>
+
+    </div> <!-- /.container -->
+
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script> -->
+
+
+    <script src="bower_components/Snap.svg/dist/snap.svg-min.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <!-- <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script> -->
+  </body>
+</html>
