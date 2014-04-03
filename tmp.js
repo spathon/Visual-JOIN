@@ -7,3 +7,20 @@
 // Colors
 // http://www.colourlovers.com/palette/1473/Ocean_Five
 // http://www.colourlovers.com/palette/3296641/red_velvet_macaron
+
+
+
+/**
+ * Hover on circle
+ */
+// current[key].hover(function(hmm){
+//   this.animate({ stroke: "yellow" }, 200, null, function(){
+//     this.animate({ stroke: "#000", }, 200);
+//   });
+//   var like = document.getElementById(this.data('table'));
+//   like.className += ' circle-hover';
+// }, function(){
+//   var like = document.getElementById(this.data('table'));
+//   var name = ' circle-hover';
+//   like.className = like.className.replace(name, "");
+// });

@@ -4,20 +4,23 @@ body { background: #F5F5F5; color: #3F2629; font: 18px/1.4 'Open Sans', sans-ser
 
 a { color: #00A0B0; text-decoration: none; }
 
-h1, h2, h3, h4, h5, h6 { text-shadow: 1px 1px 0 #ddd; color: #6A4A3C; margin: 0 0 20px; }
+h1, h2, h3, h4, h5, h6 { text-shadow: 1px 1px 0 #ddd; color: #8F252F; margin: 0 0 20px; }
 
 h1 { font-weight: bold; font-size: 55px; text-align: center;
   color: #8F252F; text-shadow: 2px 2px 0 #ddd; padding: 40px 0;
 }
+h1 span { font-size: 17px; display: block; color: #3F2629;}
 h2 { font-size: 22px; }
 
 .clearfix:before, .clearfix:after {content: " ";display: table;}
 .clearfix:after {clear: both;}
 .text-right { text-align: right; }
+.pull-right { float: right; }
 
+.line { margin: 0 0 30px; border-top: 4px solid #6A4A3C; height: 1px; background: #fff; }
 
 .joins { text-align: center; margin: 0 0 30px; }
-.joins h2 { margin: 0; }
+.joins h2 { margin: 0; color: #6A4A3C; }
 .subtitle { font-size: 12px; color: #999; margin: 0 0 10px; }
 .join { padding: 10px; border: 1px solid transparent; transition: -webkit-transform .4s, background .2s; }
 .join:hover { -webkit-transform: scale(1.1); }
@@ -27,6 +30,18 @@ h2 { font-size: 22px; }
 .is-null { color: red; }
 
 
-.is-selected { text-decoration: line-through; color: #777; }
+.is-selected td { text-decoration: line-through; color: #777; font-weight: 200; }
 
 .circle-hover { background: #fff; }
+
+
+.tables { margin: 0 0 60px; }
+
+.footer { font-size: 14px; color: #777; border-top: 1px solid #ddd; padding: 10px 15px 30px; }
+
+
+table { width: 100%; }
+th { text-align: left; }
+tr:nth-of-type(even) td { background: #fafafa; }
+th, td { border-bottom: 1px solid #ddd; }
+td { font-weighta: 200; }

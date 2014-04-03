@@ -1,37 +1,38 @@
 
 
 // Heigh and width = canvas
-var height = 150,
-    width = height + height / 2,
-    ratio = (window.innerWidth < 410 ) ? .25 : .5, // If is mobile
-    strokeWidth = 2,
-    s_width = width*ratio,
-    s_height = (height / width * s_width),
+var height = 150,                         // Canvas height
+    width = height + height / 2,          // Canvas width
+    ratio = (window.innerWidth < 410 ) ? .25 : .5, // The <svg> size in ratio (If is mobile)
+    strokeWidth = 2,                      // Circle stroke width
+    s_width = width*ratio,                // <svg> width
+    s_height = (height / width * s_width),// <svg> height
 
-    center = height / 2,
-    center2 = height,
-    radius = center - strokeWidth,
-
-    fillColor = "#C1353E";
+    center = height / 2,                  // first circle center left and both center top
+    center2 = height,                     // Second circle
+    radius = center - strokeWidth,        // The circles radius
+    fillColor = "#C1353E";                // The fill color
 
 // Set attributes on the svg tag
 var svgAttr = {
-  viewBox: "0 0 225 150",
+  viewBox: "0 0 "+ width +" "+ height,
   preserveAspectRatio: "xMaxYmax",
   width: s_width,
   height: s_height
 };
 
+// Default attributes for the circles
 var defaultAttr = {
   fill: "none",
   stroke: "#000",
   strokeWidth: strokeWidth
 };
 
+// Create an object for the svg's with custom settings
 var svgs = {
-
+  // Inner Join
   inner: {},
-
+  // Left Join
   left: {
     attr: {
       c1: {
@@ -40,9 +41,9 @@ var svgs = {
       c2: {
         fill: "transparent"
       }
-    } // attr
+    }//
   },
-
+  // Right Join
   right: {
     reverse: true,
     attr: {
@@ -52,9 +53,9 @@ var svgs = {
       c2: {
         fill: fillColor
       }
-    } // attr
+    }//
   },
-
+  // Outer Join
   outer: {
     attr: {
       c1: {
@@ -67,36 +68,31 @@ var svgs = {
   }
 };
 
-
+// Loop through all svg's and create the circles
 for(var svg in svgs){
-  var current = svgs[svg];
-  var main = current.main = Snap("#"+ svg).attr(svgAttr);
 
+  // Attach the current object to a variable
+  var current = svgs[svg];
+  current.main = Snap("#"+ svg).attr(svgAttr);
+
+  // Create an array of the 2 circles and if isset revers the order
   var circles = ['c1', 'c2'];
   if(current.reverse) circles.reverse()
 
+  // Loop through the 2 circles
   circles.forEach(function(key){
+
+    // depending on which circle make left center different
     var center1 = (key == 'c1') ? center : center2;
-    var item = (key == 'c1') ? 'users' : 'likes';
-    current[key] = main.circle(center1, center, radius)
-                  .attr(defaultAttr)
-                  .data('item', item);
+    var table = (key == 'c1') ? 'users' : 'likes';
 
-
-    // current[key].hover(function(hmm){
-    //   this.animate({ stroke: "yellow" }, 200, null, function(){
-    //     this.animate({ stroke: "#000", }, 200);
-    //   });
-    //   var like = document.getElementById(this.data('item'));
-    //   like.className += ' circle-hover';
-    // }, function(){
-    //   var like = document.getElementById(this.data('item'));
-    //   var name = ' circle-hover';
-    //   like.className = like.className.replace(name, "");
-    // });
+    // Create the circle with default attr and the table it represent
+    current[key] = current.main.circle(center1, center, radius)
+                    .attr(defaultAttr)
+                    .data('table', table);
   });
 
-  // Attributes
+  // Set custom attributes on the circles
   if(typeof current.attr != 'indefined'){
     for(var circle in current.attr){
       current[circle].attr(current.attr[circle]);
@@ -104,124 +100,29 @@ for(var svg in svgs){
   }
 };
 
-console.log(svgs);
-
 
 // inner
 var inner = svgs.inner.main;
-var cc1 = inner.circle(center,center,radius);
-cc1.attr({
+// Generate a new circle and one mask part of it
+var cc1_inner = inner.circle(center,center,radius);
+cc1_inner.attr({
     fill: fillColor
 });
-var cc2 = inner.circle(center2,center,radius);
-cc2.attr({
+var cc2_inner = inner.circle(center2,center,radius);
+cc2_inner.attr({
   fill: "#fff"
 });
-cc1.attr({
-  mask: cc2
+cc1_inner.attr({
+  mask: cc2_inner
 });
 
 
+// Outer
 var outer = svgs.outer.main;
+// Create another circle to generate the crossing strokes
 var cc1 = outer.circle(center,center,radius);
 cc1.attr({
     fill: "none",
     stroke: "#000",
     strokeWidth: strokeWidth
 });
-var cc2 = outer.circle(center2,center,radius);
-cc2.attr({
-  fill: "#fff"
-});
-cc1.attr({
-  mask: cc2
-});
-
-
-
-
-// var join = Snap("#left").attr(svgAttr);
-// var c1 = join.circle(center, center, radius);
-// var c2 = join.circle(center2, center, radius);
-// var c = join.group(c1,c2);
-// c1.attr({
-//     fill: fillColor,
-//     stroke: "#000",
-//     strokeWidth: strokeWidth
-// }).data('item', 'users');;
-// c2.attr({
-//     fill: "transparent",
-//     stroke: "#000",
-//     strokeWidth: strokeWidth
-// }).data('item', 'likes');
-
-// c1.hover(function(hmm){
-//   this.animate({ stroke: "yellow" }, 200, null, function(){
-//     this.animate({ stroke: "#000", }, 200);
-//   });
-//   var like = document.getElementById(this.data('item'));
-//   like.className += ' circle-hover';
-// }, function(){
-//   var like = document.getElementById(this.data('item'));
-//   var name = ' circle-hover';
-//   like.className = like.className.replace(name, "");
-// });
-
-// c2.hover(function(hmm){
-//   this.animate({ stroke: "yellow" }, 200, null, function(){
-//     this.animate({ stroke: "#000", }, 200);
-//   });
-//   var like = document.getElementById(this.data('item'));
-//   like.className += ' circle-hover';
-// }, function(){
-//   var like = document.getElementById(this.data('item'));
-//   var name = ' circle-hover';
-//   like.className = like.className.replace(name, "");
-// });
-
-
-// var join = Snap("#right").attr(svgAttr);
-// var c2 = join.circle(center2, center, radius);
-// var c1 = join.circle(center, center, radius);
-// c2.attr({
-//     fill: fillColor,
-//     stroke: "#000",
-//     strokeWidth: strokeWidth
-// });
-// c1.attr({
-//     fill: "none",
-//     stroke: "#000",
-//     strokeWidth: strokeWidth
-// });
-
-
-
-
-// var join = Snap("#outer").attr(svgAttr);
-// var c1 = join.circle(center, center, radius);
-// var c2 = join.circle(center2, center, radius);
-// c1.attr({
-//     fill: fillColor,
-//     stroke: "#000",
-//     strokeWidth: strokeWidth
-// });
-// c2.attr({
-//     fill: fillColor,
-//     stroke: "#000",
-//     strokeWidth: strokeWidth
-// });
-
-// var cc1 = join.circle(center,center,radius);
-// cc1.attr({
-//     fill: "none",
-//     stroke: "#000",
-//     strokeWidth: strokeWidth
-// });
-// var cc2 = join.circle(center2,center,radius);
-// cc2.attr({
-//   fill: "#fff"
-// });
-// cc1.attr({
-//   mask: cc2
-// });
-
