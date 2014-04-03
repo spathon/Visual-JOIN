@@ -1,15 +1,14 @@
-# humanstxt.org/
-# The humans responsible & technology colophon
+/* TEAM */
+  Creator: Patrik Spathon
+  Site: http://spathon.com
+  Twitter: @spathon
+  Location: Chamonix, France / Stockholm, Sweden
 
-# TEAM
-
-    <name> -- <role> -- <twitter>
-
-# THANKS
-
-    <name>
-
-# TECHNOLOGY COLOPHON
-
-    HTML5, CSS3
-    Normalize.css, jQuery, Modernizr
+/* SITE */
+  Last update: 2014/04/03
+  Language: English
+  Standards: HTML5, CSS3
+  Doctype: HTML5
+  Components: AngularJs, Snap.svg, Bootstrap grid, Google font
+  IDE: Sublime Text 3
+  Software: Tower(git)
