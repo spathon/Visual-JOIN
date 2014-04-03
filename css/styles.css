@@ -13,6 +13,7 @@ h2 { font-size: 22px; }
 
 .clearfix:before, .clearfix:after {content: " ";display: table;}
 .clearfix:after {clear: both;}
+.text-right { text-align: right; }
 
 
 .joins { text-align: center; margin: 0 0 30px; }

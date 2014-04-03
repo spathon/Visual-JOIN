@@ -21,9 +21,14 @@ var height = 150,
     fillColor = "#C1353E";
 
 
-var attr = { width: s_width, height: s_height };
+var svgAttr = {
+  viewBox: "0 0 225 150",
+  preserveAspectRatio: "xMaxYmax",
+  width: s_width,
+  height: s_height
+};
 
-var join = Snap("#inner").attr(attr);
+var join = Snap("#inner").attr(svgAttr);
 var c1 = join.circle(center, center, radius);
 var c2 = join.circle(center2, center, radius);
 var c = join.group(c1,c2);
@@ -46,7 +51,7 @@ cc1.attr({
 });
 
 
-var join = Snap("#left").attr(attr);
+var join = Snap("#left").attr(svgAttr);
 var c1 = join.circle(center, center, radius);
 var c2 = join.circle(center2, center, radius);
 var c = join.group(c1,c2);
@@ -86,7 +91,7 @@ c2.hover(function(hmm){
 });
 
 
-var join = Snap("#right").attr(attr);
+var join = Snap("#right").attr(svgAttr);
 var c2 = join.circle(center2, center, radius);
 var c1 = join.circle(center, center, radius);
 c2.attr({
@@ -103,7 +108,7 @@ c1.attr({
 
 
 
-var join = Snap("#outer").attr(attr);
+var join = Snap("#outer").attr(svgAttr);
 var c1 = join.circle(center, center, radius);
 var c2 = join.circle(center2, center, radius);
 c1.attr({
@@ -130,40 +135,4 @@ cc2.attr({
 cc1.attr({
   mask: cc2
 });
-
-
-
-
-
-// ok, raphael sets width/height even though a viewBox has been set, so let's rip out those attributes (yes, this will not work for VML)
-// var svg = document.querySelector("svg");
-// svg.removeAttribute("width");
-// svg.removeAttribute("height");
-// // svg.setAttribute('preserveAspectRatio','xMidYMid meet'); // none
-
-// var bg = paper.rect(0,0,320,200);
-// bg.attr('fill', '#000');
-
-// // Creates circle at x = 50, y = 40, with radius 10
-// var circle = paper.circle(50, 40, 10);
-// // Sets the fill attribute of the circle to red (#f00)
-// circle.attr("fill", "#f00");
-
-// // Sets the stroke attribute of the circle to white
-// circle.attr("stroke", "#fff");
-
-// var path = "M 191.97147,53.436405 C 223.25430,71.458270 242.52530,104.76406 242.52530,140.80780 C 242.52530,176.85154 223.25430,210.15733 191.97147,228.17919 C 160.68865,210.15733 141.41763,176.85154 141.41763,140.80780 C 141.41763,104.76406 160.68865,71.458270 191.97147,53.436405";
-
-// var center = paper.path(path);
-// center.attr("fill", "#f0f");
-
-// center.attr({ "stroke": "#afa", "stroke-width": "2" });
-
-
-// var _transformedPath = Raphael.transformPath(path, 'T-100,-50s0.5');
-// center.animate({path: _transformedPath}, 1000);
-
-// paper.setViewBox(0, 0, 200, 100, true);
-// paper.setSize('100%', '100%');
-
 
