@@ -104,7 +104,7 @@
               </td>
             </tr>
           </table>
-          <button ng-click="modalType='add';type='users'">Add</button>
+          <button ng-click="addModal('users')">Add</button>
         </div>
 
         <div class="col-sm-4">
@@ -138,7 +138,7 @@
             </tr>
           </table>
 
-          <button ng-click="modalType='add';type='likes'">Add</button>
+          <button ng-click="addModal('likes')">Add</button>
         </div>
 
       </div>
@@ -146,7 +146,7 @@
 
       <div class="modal" ng-show="modalType">
         <form ng-submit="addItem()" ng-show="modalType == 'add'">
-          <input type="text" ng-model="addId" placeholder="ID" class="input-sm">
+          <input type="text" id="addId" ng-model="addId" placeholder="ID" class="input-sm">
           <input type="text" ng-model="addName" placeholder="{{ (type == 'likes') ? 'Like' : 'Name' }}">
           <button type="submit">Add</button>
         </form>

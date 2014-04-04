@@ -59,6 +59,30 @@ function JoinsCtrl($scope) {
     $scope.selectJoin($scope.current_join);
   };
 
+
+  $scope.addModal = function(type){
+    $scope.type = type;
+    var id = 1;
+
+    $scope.modalType = 'add';
+
+    // auto-increment user id as default on add and show lates
+    $scope.users.forEach(function(user){
+      if(id < user.id) id = user.id;
+    });
+    if(type == 'users'){
+      id++;
+    }
+    $scope.addId = id;
+
+    // Focus on the id field
+    setTimeout(function(){
+      var add = document.getElementById('addId');
+      add.focus();
+    }, 100)
+
+  }
+
   $scope.addItem = function(){
 
     // add the item to the array
