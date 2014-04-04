@@ -88,12 +88,13 @@
 
       <div class="row tables clearfix">
 
-        <div class="col-sm-4 users">
-          <h3 class="user">Users</h3>
+        <!-- Users -->
+        <div class="col-sm-4">
+          <h3>Users</h3>
           <table>
             <tr>
               <th>ID</th>
-              <th>Name</th>
+              <th class="user">Name</th>
             </tr>
             <tr ng-class="isNotSelected(user.id)" ng-repeat="user in users">
               <td>{{user.id}}</td>
@@ -107,6 +108,7 @@
           <button ng-click="addModal('users')">Add</button>
         </div>
 
+        <!-- Join -->
         <div class="col-sm-4 joins-table">
           <h3>JOIN</h3>
           <table>
@@ -121,12 +123,13 @@
           </table>
         </div>
 
-        <div class="col-sm-4 likes">
-          <h3 class="like">Likes</h3>
+        <!-- Likes -->
+        <div class="col-sm-4">
+          <h3>Likes</h3>
           <table>
             <tr>
               <th>User ID</th>
-              <th>Like</th>
+              <th class="like">Like</th>
             </tr>
             <tr ng-class="isNotSelected(like.user_id)" ng-repeat="like in likes">
               <td>{{ like.user_id }}</td>
