@@ -32,7 +32,7 @@
       <div class="row joins clearfix">
         <div class="col-xs-3">
           <div class="join" ng-class="currentJoinClass('inner')" ng-click="selectJoin('inner')">
-            <h2>INNER JOIN</h2>
+            <h2 title="{{sql.inner}}">INNER JOIN</h2>
             <div class="subtitle">(or JOIN)</div>
             <svg id="inner"></svg>
           </div>
@@ -73,7 +73,17 @@
 
       <div class="line"></div>
 
-      <div class="sql" ng-bind-html="sql[current_join]"></div>
+      <div class="col-xs-12">
+        <div class="sql-table">
+          <table>
+            <tr>
+              <td>
+                <span class="sql" ng-bind-html="sql[current_join]"></span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
 
 
       <div class="row tables clearfix">
@@ -94,7 +104,7 @@
               </td>
             </tr>
           </table>
-          <button ng-click="moduleType='add';type='users'">Add</button>
+          <button ng-click="modalType='add';type='users'">Add</button>
         </div>
 
         <div class="col-sm-4">
@@ -123,26 +133,26 @@
               <td>
                 <button type="button" ng-click="removeItem('likes', $index)"
                   class="pull-right danger">X</button>
-                {{ like.name }}
+                {{ like.like }}
               </td>
             </tr>
           </table>
 
-          <button ng-click="moduleType='add';type='likes'">Add</button>
+          <button ng-click="modalType='add';type='likes'">Add</button>
         </div>
 
       </div>
 
 
-      <div class="modal" ng-show="moduleType">
-        <form class="add-modal" ng-submit="addItem()" ng-show="moduleType == 'add'">
+      <div class="modal" ng-show="modalType">
+        <form ng-submit="addItem()" ng-show="modalType == 'add'">
           <input type="text" ng-model="addId" placeholder="ID" class="input-sm">
           <input type="text" ng-model="addName" placeholder="{{ (type == 'likes') ? 'Like' : 'Name' }}">
           <button type="submit">Add</button>
         </form>
       </div>
 
-      <div class="overlay" ng-show="moduleType" ng-click="moduleType=false"></div>
+      <div class="overlay" ng-show="modalType" ng-click="modalType=false"></div>
 
 
 

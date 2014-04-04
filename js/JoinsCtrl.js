@@ -14,21 +14,21 @@ function JoinsCtrl($scope) {
   ];
 
   $scope.likes = [
-    { user_id: 3, name: 'Stars' },
-    { user_id: 1, name: 'Climbing' },
-    { user_id: 1, name: 'Code' },
-    { user_id: 6, name: 'Rugby' },
-    { user_id: 4, name: 'Apples' }
+    { user_id: 3, like: 'Stars' },
+    { user_id: 1, like: 'Climbing' },
+    { user_id: 1, like: 'Code' },
+    { user_id: 6, like: 'Rugby' },
+    { user_id: 4, like: 'Apples' }
   ];
 
   $scope.sql = {
-    inner: "SELECT users.name AS name, likes.name AS 'like' FROM users JOIN likes ON users.id = likes.user_id;",
-    left: "SELECT users.name AS name, likes.name AS 'like' FROM users LEFT JOIN likes ON users.id = likes.user_id;",
-    right: "SELECT users.name AS name, likes.name AS 'like' FROM users RIGHT JOIN likes ON users.id = likes.user_id;",
+    inner: "SELECT users.name, likes.like FROM users JOIN likes ON users.id = likes.user_id;",
+    left: "SELECT users.name, likes.like FROM users LEFT JOIN likes ON users.id = likes.user_id;",
+    right: "SELECT users.name, likes.like FROM users RIGHT JOIN likes ON users.id = likes.user_id;",
     outer:
-      "SELECT users.name AS 'name', likes.name AS 'like' FROM users LEFT OUTER JOIN likes ON users.id = likes.user_id"+
+      "SELECT users.name, likes.like FROM users LEFT OUTER JOIN likes ON users.id = likes.user_id"+
       "<br>UNION"+
-      "<br>SELECT users.name AS 'name', likes.name AS 'like' FROM users RIGHT OUTER JOIN likes ON users.id = likes.user_id"
+      "<br>SELECT users.name, likes.like FROM users RIGHT OUTER JOIN likes ON users.id = likes.user_id"
   }
 
   $scope.joins = [];
@@ -62,9 +62,11 @@ function JoinsCtrl($scope) {
   $scope.addItem = function(){
 
     // add the item to the array
-    var newItem = { name: $scope.addName };
-    newItem[($scope.type == 'users') ? 'id' : 'user_id'] = $scope.addId;
-    $scope[$scope.type].push( newItem );
+    if($scope.type == 'users'){
+      $scope[$scope.type].push({ id: $scope.addId, name: $scope.addName });
+    }else{
+      $scope[$scope.type].push({ user_id: $scope.addId, like: $scope.addName });
+    }
 
     // Clear the data
     $scope.addName = '';
@@ -74,11 +76,11 @@ function JoinsCtrl($scope) {
     $scope.selectJoin($scope.current_join);
 
     // Close the modal
-    $scope.moduleType = false;
+    $scope.modalType = false;
   };
 
 
-  // SELECT users.name AS name, likes.name AS 'like' FROM users JOIN likes ON users.id = likes.user_id;
+  // SELECT users.name, likes.like FROM users JOIN likes ON users.id = likes.user_id;
   $scope.innerJoin = function(){
 
     var result = [];
@@ -88,7 +90,7 @@ function JoinsCtrl($scope) {
     angular.forEach($scope.likes, function(like){ // value, key
       angular.forEach($scope.users, function(user){
         if(user.id == like.user_id){
-          result.push({ name: user.name, like: like.name });
+          result.push({ name: user.name, like: like.like });
           $scope.user_ids.push(user.id);
         }
       });
@@ -100,7 +102,7 @@ function JoinsCtrl($scope) {
   $scope.innerJoin();
 
 
-  // SELECT users.name AS name, likes.name AS 'like' FROM users LEFT JOIN likes ON users.id = likes.user_id;
+  // SELECT users.name, likes.like FROM users LEFT JOIN likes ON users.id = likes.user_id;
   $scope.leftJoin = function(){
 
     var result = [];
@@ -112,7 +114,7 @@ function JoinsCtrl($scope) {
       $scope.user_ids.push(user.id);
       angular.forEach($scope.likes, function(like){
         if(user.id == like.user_id){
-          result.push({ name: user.name, like: like.name });
+          result.push({ name: user.name, like: like.like });
           hasLike = true;
         }
       });
@@ -124,7 +126,7 @@ function JoinsCtrl($scope) {
   };
 
 
-  // SELECT users.name AS name, likes.name AS 'like' FROM users RIGHT JOIN likes ON users.id = likes.user_id;
+  // SELECT users.name, likes.like FROM users RIGHT JOIN likes ON users.id = likes.user_id;
   $scope.rightJoin = function(){
 
     var result = [];
@@ -136,21 +138,21 @@ function JoinsCtrl($scope) {
       $scope.user_ids.push(like.user_id);
       angular.forEach($scope.users, function(user){
         if(user.id == like.user_id){
-          result.push({ name: user.name, like: like.name });
+          result.push({ name: user.name, like: like.like });
           hasLike = true;
         }
       });
       if(!hasLike){
-        result.push({ name: 'NULL', like: like.name });
+        result.push({ name: 'NULL', like: like.like });
       }
     });
     $scope.joins = result;
   };
 
 
-  // SELECT users.name AS 'name', likes.name AS 'like' FROM users LEFT OUTER JOIN likes ON users.id = likes.user_id
+  // SELECT users.name, likes.like FROM users LEFT OUTER JOIN likes ON users.id = likes.user_id
   // UNION
-  // SELECT users.name AS 'name', likes.name AS 'like' FROM users RIGHT OUTER JOIN likes ON users.id = likes.user_id
+  // SELECT users.name, likes.like FROM users RIGHT OUTER JOIN likes ON users.id = likes.user_id
   $scope.outerJoin = function(){
 
     var result = [];
@@ -162,7 +164,7 @@ function JoinsCtrl($scope) {
       $scope.user_ids.push(user.id);
       angular.forEach($scope.likes, function(like){
         if(user.id == like.user_id){
-          result.push({ name: user.name, like: like.name });
+          result.push({ name: user.name, like: like.like });
           hasLike = true;
         }
       });
@@ -174,7 +176,7 @@ function JoinsCtrl($scope) {
     // Loop through all likes and users to find matches
     angular.forEach($scope.likes, function(like){ // value, key
       if($scope.user_ids.indexOf(like.user_id) === -1){
-        result.push({ name: 'NULL', like: like.name });
+        result.push({ name: 'NULL', like: like.like });
         $scope.user_ids.push(like.user_id);
       }
     });
