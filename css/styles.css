@@ -27,7 +27,7 @@ h2 { font-size: 22px; }
 .join:hover,
 .current-join { cursor: pointer; background: #fff; border-color: #ddd; border-radius: 4px; }
 
-.is-null { color: red; }
+.is-null { color: #ccc; }
 
 
 .is-not-selected td { text-decoration: line-through; color: #777; font-weight: 200; }
