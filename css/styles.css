@@ -68,9 +68,9 @@ input { padding: 5px; border: 1px solid #ccc; border-radius: 4px; width: 160px; 
 
 .sql-table { font-size: 14px; background: #fff; border: 1px solid #6A4A3C; position: relative;
   border-radius: 4px; margin: 0 0 30px; box-shadow: inset 0 0 10px #eee }
-.sql-table:before { content: "SQL"; position: absolute; top: -13px; left: 50%; display: block;
+.sql-table:before { content: "SQL"; position: absolute; top: -14px; left: 50%; display: block;
   width: 46px; margin: 0 0 0 -23px; background: #fff; border: 1px solid #6A4A3C;
   border-radius: 4px; text-align: center; padding: 2px 0; }
-.sql-table table { text-align: center; height: 70px; margin: 0; }
+.sql-table table { text-align: center; height: 75px; margin: 0; }
 .sql-table td { border: none; vertical-align: middle; }
 .sql { margin: 0 0 30px; text-align: center; color: #777; text-shadow: 1px 1px 0 #fff; }
