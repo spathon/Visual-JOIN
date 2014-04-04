@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" ng-app>
+<html ng-app="joinApp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -73,6 +73,8 @@
 
       <div class="line"></div>
 
+      <div class="sql" ng-bind-html="sql[current_join]"></div>
+
 
       <div class="row tables clearfix">
 
@@ -83,11 +85,16 @@
               <th>ID</th>
               <th>Name</th>
             </tr>
-            <tr ng-class="isSelected(user.id)" ng-repeat="user in users">
+            <tr ng-class="isNotSelected(user.id)" ng-repeat="user in users">
               <td>{{user.id}}</td>
-              <td>{{user.name}}</td>
+              <td>
+                <button type="button" ng-click="removeItem('users', $index)"
+                  class="pull-right danger">X</button>
+                {{user.name}}
+              </td>
             </tr>
           </table>
+          <button ng-click="moduleType='add';type='users'">Add</button>
         </div>
 
         <div class="col-sm-4">
@@ -111,14 +118,31 @@
               <th>User ID</th>
               <th>Like</th>
             </tr>
-            <tr ng-class="isSelected(like.user_id)" ng-repeat="like in likes">
+            <tr ng-class="isNotSelected(like.user_id)" ng-repeat="like in likes">
               <td>{{ like.user_id }}</td>
-              <td>{{ like.name }}</td>
+              <td>
+                <button type="button" ng-click="removeItem('likes', $index)"
+                  class="pull-right danger">X</button>
+                {{ like.name }}
+              </td>
             </tr>
           </table>
+
+          <button ng-click="moduleType='add';type='likes'">Add</button>
         </div>
 
       </div>
+
+
+      <div class="modal" ng-show="moduleType">
+        <form class="add-modal" ng-submit="addItem()" ng-show="moduleType == 'add'">
+          <input type="text" ng-model="addId" placeholder="ID" class="input-sm">
+          <input type="text" ng-model="addName" placeholder="{{ (type == 'likes') ? 'Like' : 'Name' }}">
+          <button type="submit">Add</button>
+        </form>
+      </div>
+
+      <div class="overlay" ng-show="moduleType" ng-click="moduleType=false"></div>
 
 
 
@@ -132,6 +156,7 @@
     </div> <!-- /.container -->
 
     <script src="js/angular.min.js"></script>
+    <script src="js/angular-sanitize.min.js"></script>
     <script src="js/JoinsCtrl.js"></script>
     <script src="js/snap.svg-min.js"></script>
     <script src="js/main.js"></script>
