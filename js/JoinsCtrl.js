@@ -22,14 +22,25 @@ function JoinsCtrl($scope) {
   ];
 
   $scope.sql = {
-    inner: "SELECT users.name, likes.like FROM users JOIN likes ON users.id = likes.user_id;",
-    left: "SELECT users.name, likes.like FROM users LEFT JOIN likes ON users.id = likes.user_id;",
-    right: "SELECT users.name, likes.like FROM users RIGHT JOIN likes ON users.id = likes.user_id;",
-    outer:
-      "SELECT users.name, likes.like FROM users LEFT OUTER JOIN likes ON users.id = likes.user_id"+
-      "<br>UNION"+
-      "<br>SELECT users.name, likes.like FROM users RIGHT OUTER JOIN likes ON users.id = likes.user_id"
-  }
+    inner: {
+      query: "SELECT users.name, likes.like FROM users JOIN likes ON users.id = likes.user_id;",
+      desc: ""
+    },
+    left: {
+      query: "SELECT users.name, likes.like FROM users LEFT JOIN likes ON users.id = likes.user_id;",
+      desc: ""
+    },
+    right: {
+      query: "SELECT users.name, likes.like FROM users RIGHT JOIN likes ON users.id = likes.user_id;",
+      dec: ""
+    },
+    outer: {
+      query: "SELECT users.name, likes.like FROM users LEFT OUTER JOIN likes ON users.id = likes.user_id"+
+             "<br>UNION"+
+             "<br>SELECT users.name, likes.like FROM users RIGHT OUTER JOIN likes ON users.id = likes.user_id",
+      desc: ""
+    }
+  };
 
   $scope.joins = [];
   $scope.user_ids = [];

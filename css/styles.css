@@ -5,20 +5,37 @@ body { background: #F5F5F5; color: #3F2629; font: 18px/1.4 'Open Sans', sans-ser
 a { color: #00A0B0; text-decoration: none; }
 
 h1, h2, h3, h4, h5, h6 { text-shadow: 1px 1px 0 #ddd; color: #8F252F; margin: 0 0 20px; }
-
 h1 { font-weight: bold; font-size: 55px; text-align: center;
   color: #8F252F; text-shadow: 2px 2px 0 #ddd; padding: 40px 0;
 }
 h1 span { font-size: 17px; display: block; color: #3F2629;}
 h2 { font-size: 22px; }
 
+table { width: 100%; margin: 0 0 30px; }
+th { text-align: left; }
+tr:nth-of-type(even) td { background: #fafafa; }
+th, td { border-bottom: 1px solid #ddd; }
+
+/* Forms and buttons */
+button { background: #5EC456; border: 1px solid #3E9436; color: #fff; text-shadow: 1px 1px 0 #3E9436;
+  padding: 3px 7px; border-radius: 4px; }
+button:hover { background: #4Eb446; }
+.danger { background: #C1353E; border-color: #a11413; text-shadow: 1px 1px 0 #a11413; padding: 0 5px; font-weight: bold; font-size: 14px; margin-top: 2px; }
+.danger:hover { background: #b1252E; }
+input { padding: 5px; border: 1px solid #ccc; border-radius: 4px; width: 160px; }
+.input-sm { width: 47px; }
+
+
+
+/* Helper classes */
 .clearfix:before, .clearfix:after {content: " ";display: table;}
 .clearfix:after {clear: both;}
 .text-right { text-align: right; }
 .pull-right { float: right; }
 
-.line { display: none; margin: 0 0 10px; border-top: 2px solid #6A4A3C; height: 1px; background: #fff; }
 
+
+/* JOINS */
 .joins { text-align: center; margin: 0 0 30px; }
 .joins h2 { margin: 0; color: #6A4A3C; }
 .subtitle { font-size: 12px; color: #999; margin: 0 0 10px; }
@@ -27,45 +44,9 @@ h2 { font-size: 22px; }
 .join:hover,
 .current-join { cursor: pointer; background: #fff; border-color: #ddd; border-radius: 4px; }
 
-.is-null { color: #ccc; }
 
 
-.is-not-selected td { text-decoration: line-through; color: #777; font-weight: 200; }
-
-.circle-hover { background: #fff; }
-
-
-.tables { margin: 0 0 30px; }
-.tables button { opacity: 0; pointer-events: none; transition: opacity .4s; }
-.tables > div:hover button { pointer-events: auto; opacity: 1; }
-
-.footer { font-size: 14px; color: #777; border-top: 1px solid #ddd; padding: 10px 15px 30px; }
-
-
-table { width: 100%; margin: 0 0 30px; }
-th { text-align: left; }
-tr:nth-of-type(even) td { background: #fafafa; }
-th, td { border-bottom: 1px solid #ddd; }
-
-
-
-.overlay { position: fixed; top:0;right:0;bottom:0;left:0; background: rgba(0,0,0,.5); }
-.modal { position: fixed; top: 50%; left: 50%; z-index: 10; width: 300px; margin: -40px 0 0 -150px;
-  padding: 15px; border: 2px solid #6A4A3C; background: #fff;
-  border-radius: 8px; box-shadow: inset 0 0 6px #888;
-}
-
-
-button { background: #5EC456; border: 1px solid #3E9436; color: #fff; text-shadow: 1px 1px 0 #3E9436;
-  padding: 3px 7px; border-radius: 4px; }
-button:hover { background: #4Eb446; }
-.danger { background: #C1353E; border-color: #a11413; text-shadow: 1px 1px 0 #a11413; padding: 0 5px; font-weight: bold; font-size: 14px; margin-top: 2px; }
-.danger:hover { background: #b1252E; }
-input { padding: 5px; border: 1px solid #ccc; border-radius: 4px; width: 160px; }
-
-.input-sm { width: 47px; }
-
-
+/* SQL */
 .sql-table { font-size: 14px; background: #fff; border: 1px solid #ddd; position: relative;
   border-radius: 4px; margin: 0 0 30px; box-shadow: inset 0 0 10px #eee }
 .sql-table:before { content: "SQL"; position: absolute; top: -14px; left: 50%; display: block;
@@ -76,6 +57,30 @@ input { padding: 5px; border: 1px solid #ccc; border-radius: 4px; width: 160px; 
 .sql { margin: 0 0 30px; text-align: center; color: #777; text-shadow: 1px 1px 0 #fff; }
 
 
+
+/* Tables */
+.tables { margin: 0 0 30px; }
+.tables button { opacity: 0; pointer-events: none; transition: opacity .4s; }
+.tables > div:hover button { pointer-events: auto; opacity: 1; }
 .user { color: #00A0B0; }
 .like { color: #EB6841; }
+/* States */
+.is-null { color: #ccc; }
+.is-not-selected td { text-decoration: line-through; color: #777; font-weight: 200; }
+
+
+
+/* Footer */
+.footer { font-size: 14px; color: #777; border-top: 1px solid #ddd; padding: 10px 15px 30px; }
+
+
+
+/* Modals */
+.overlay { position: fixed; top:0;right:0;bottom:0;left:0; background: rgba(0,0,0,.5); }
+.modal { position: fixed; top: 50%; left: 50%; z-index: 10; width: 300px; margin: -40px 0 0 -150px;
+  padding: 15px; border: 2px solid #6A4A3C; background: #fff;
+  border-radius: 8px; box-shadow: inset 0 0 6px #888;
+}
+
+
 
