@@ -4,14 +4,14 @@
 var height = 150,                         // Canvas height
     width = height + height / 2,          // Canvas width
     ratio = (window.innerWidth < 410 ) ? .25 : .5, // The <svg> size in ratio (If is mobile)
-    strokeWidth = 2,                      // Circle stroke width
+    strokeWidth = 3,                      // Circle stroke width
     s_width = width*ratio,                // <svg> width
     s_height = (height / width * s_width),// <svg> height
 
     center = height / 2,                  // first circle center left and both center top
     center2 = height,                     // Second circle
     radius = center - strokeWidth,        // The circles radius
-    fillColor = "#C1353E";                // The fill color
+    fillColor = "#CC333F";                // The fill color
 
 // Set attributes on the svg tag
 var svgAttr = {
@@ -24,7 +24,7 @@ var svgAttr = {
 // Default attributes for the circles
 var defaultAttr = {
   fill: "none",
-  stroke: "#000",
+  stroke: "#EB6841",
   strokeWidth: strokeWidth
 };
 
@@ -90,6 +90,12 @@ for(var svg in svgs){
     current[key] = current.main.circle(center1, center, radius)
                     .attr(defaultAttr)
                     .data('table', table);
+
+    if(key == 'c1'){
+      current[key].attr({
+        stroke: "#00A0B0"
+      })
+    }
   });
 
   // Set custom attributes on the circles
@@ -123,6 +129,6 @@ var outer = svgs.outer.main;
 var cc1 = outer.circle(center,center,radius);
 cc1.attr({
     fill: "none",
-    stroke: "#000",
+    stroke: "#00A0B0",
     strokeWidth: strokeWidth
 });

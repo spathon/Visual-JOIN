@@ -88,8 +88,8 @@
 
       <div class="row tables clearfix">
 
-        <div class="col-sm-4" id="users">
-          <h3>Users</h3>
+        <div class="col-sm-4 users">
+          <h3 class="user">Users</h3>
           <table>
             <tr>
               <th>ID</th>
@@ -107,12 +107,12 @@
           <button ng-click="addModal('users')">Add</button>
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-4 joins-table">
           <h3>JOIN</h3>
           <table>
             <tr>
-              <th>Name</th>
-              <th>Like</th>
+              <th class="user">Name</th>
+              <th class="like">Like</th>
             </tr>
             <tr ng-repeat="join in joins">
               <td ng-class="{ 'is-null': (join.name == 'NULL') }">{{ join.name }}</td>
@@ -121,8 +121,8 @@
           </table>
         </div>
 
-        <div class="col-sm-4" id="likes">
-          <h3>Likes</h3>
+        <div class="col-sm-4 likes">
+          <h3 class="like">Likes</h3>
           <table>
             <tr>
               <th>User ID</th>

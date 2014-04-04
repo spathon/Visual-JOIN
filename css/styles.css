@@ -74,3 +74,8 @@ input { padding: 5px; border: 1px solid #ccc; border-radius: 4px; width: 160px; 
 .sql-table table { text-align: center; height: 75px; margin: 0; }
 .sql-table td { border: none; vertical-align: middle; }
 .sql { margin: 0 0 30px; text-align: center; color: #777; text-shadow: 1px 1px 0 #fff; }
+
+
+.user { color: #00A0B0; }
+.like { color: #EB6841; }
+.joins-table h3 { color: #CC333F; }
