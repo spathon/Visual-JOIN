@@ -3,7 +3,7 @@
 // Heigh and width = canvas
 var height = 150,                         // Canvas height
     width = height + height / 2,          // Canvas width
-    ratio = (window.innerWidth < 410 ) ? .25 : 1.5, // The <svg> size in ratio (If is mobile)
+    ratio = (window.innerWidth < 410 ) ? .25 : .5, // The <svg> size in ratio (If is mobile)
     strokeWidth = 3,                      // Circle stroke width
     s_width = width*ratio,                // <svg> width
     s_height = (height / width * s_width),// <svg> height
