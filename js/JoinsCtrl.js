@@ -22,23 +22,27 @@ function JoinsCtrl($scope) {
   ];
 
   $scope.sql = {
+    show_desc: false,
+    toggle_desc: function(){
+      $scope.sql.show_desc = $scope.sql.show_desc ? false : true;
+    },
     inner: {
       query: "SELECT users.name, likes.like FROM users JOIN likes ON users.id = likes.user_id;",
-      desc: ""
+      desc: "INNER JOIN or just JOIN retrieves all users and likes that match each other ( where the id field in users matches a user_id in the likes table and vice versa )"
     },
     left: {
       query: "SELECT users.name, likes.like FROM users LEFT JOIN likes ON users.id = likes.user_id;",
-      desc: ""
+      desc: "LEFT JOIN retrieves all users and it's likes if there is any else sets NULL in the like field"
     },
     right: {
       query: "SELECT users.name, likes.like FROM users RIGHT JOIN likes ON users.id = likes.user_id;",
-      dec: ""
+      desc: "RIGHT JOIN is like LEFT JOIN but retrieves all likes with all matching users or NULL if it don't hav any mathcing user"
     },
     outer: {
       query: "SELECT users.name, likes.like FROM users LEFT OUTER JOIN likes ON users.id = likes.user_id"+
              "<br>UNION"+
              "<br>SELECT users.name, likes.like FROM users RIGHT OUTER JOIN likes ON users.id = likes.user_id",
-      desc: ""
+      desc: "OUTER JOIN or OUTER LEFT and RIGHT with UNION (MySQL don't support FULL OUTER JOIN) retrieves all users and likes and matches them and sets NULL on any like without any match on user and same thing with user with no matching like"
     }
   };
 

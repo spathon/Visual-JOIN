@@ -83,6 +83,8 @@
             <tr>
               <td>
                 <span class="sql" ng-bind-html="sql[current_join].query"></span>
+                <span class="show-desc" ng-click="sql.toggle_desc()">Description &raquo;</span>
+                <span class="desc" ng-show="sql.show_desc">{{ sql[current_join].desc }}</span>
               </td>
             </tr>
           </table>
