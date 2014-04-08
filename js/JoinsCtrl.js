@@ -32,7 +32,7 @@ function JoinsCtrl($scope) {
     },
     left: {
       query: "SELECT users.name, likes.like FROM users LEFT JOIN likes ON users.id = likes.user_id;",
-      desc: "LEFT JOIN retrieves all users and it's likes if there is any else sets NULL in the like field"
+      desc: "LEFT JOIN retrieves all users and it's likes. If the like doesn't exist, it sets NULL in the like field"
     },
     right: {
       query: "SELECT users.name, likes.like FROM users RIGHT JOIN likes ON users.id = likes.user_id;",
