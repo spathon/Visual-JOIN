@@ -32,17 +32,17 @@ function JoinsCtrl($scope) {
     },
     left: {
       query: "SELECT users.name, likes.like FROM users LEFT JOIN likes ON users.id = likes.user_id;",
-      desc: "LEFT JOIN retrieves all users and it's likes if there is any else sets NULL in the like field"
+      desc: "LEFT JOIN retrieves all users and it's likes. If the like doesn't exist, it sets NULL in the like field"
     },
     right: {
       query: "SELECT users.name, likes.like FROM users RIGHT JOIN likes ON users.id = likes.user_id;",
-      desc: "RIGHT JOIN is like LEFT JOIN but retrieves all likes with all matching users or NULL if it don't hav any mathcing user"
+      desc: "RIGHT JOIN is like LEFT JOIN but retrieves all likes with all matching users or NULL if it doesn't have any matching user"
     },
     outer: {
       query: "SELECT users.name, likes.like FROM users LEFT OUTER JOIN likes ON users.id = likes.user_id"+
              "<br>UNION"+
              "<br>SELECT users.name, likes.like FROM users RIGHT OUTER JOIN likes ON users.id = likes.user_id",
-      desc: "OUTER JOIN or OUTER LEFT and RIGHT with UNION (MySQL don't support FULL OUTER JOIN) retrieves all users and likes and matches them and sets NULL on any like without any match on user and same thing with user with no matching like"
+      desc: "OUTER JOIN or OUTER LEFT and RIGHT with UNION (MySQL doesn't support FULL OUTER JOIN) retrieves all users and likes, matches them, and sets NULL on any like without a match on user, and vice versa with any user that has no matching like"
     }
   };
 
