@@ -36,7 +36,7 @@ function JoinsCtrl($scope) {
     },
     right: {
       query: "SELECT users.name, likes.like FROM users RIGHT JOIN likes ON users.id = likes.user_id;",
-      desc: "RIGHT JOIN is like LEFT JOIN but retrieves all likes with all matching users or NULL if it don't hav any matching user"
+      desc: "RIGHT JOIN is like LEFT JOIN but retrieves all likes with all matching users or NULL if it don't have any matching user"
     },
     outer: {
       query: "SELECT users.name, likes.like FROM users LEFT OUTER JOIN likes ON users.id = likes.user_id"+
