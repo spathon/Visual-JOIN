@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FC } from 'react';
 
 const width = 112.5;
 const height = 75;
@@ -13,7 +13,7 @@ const strokeColorRight = '#EB6841';
 const strokeWidth = 1.5;
 
 // Simple Venn-style SVGs for JOIN types
-export function InnerJoinSVG() {
+export const InnerJoinSVG: FC = () => {
   // Fill only the intersection using SVG mask, always red
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
@@ -38,7 +38,7 @@ export function InnerJoinSVG() {
   );
 }
 
-export function LeftJoinSVG() {
+export const LeftJoinSVG: FC = () => {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <circle cx={centerX1} cy={centerY} r={radius} fill={fillColor} />
@@ -49,7 +49,7 @@ export function LeftJoinSVG() {
   );
 }
 
-export function RightJoinSVG() {
+export const RightJoinSVG: FC = () => {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <circle cx={centerX2} cy={centerY} r={radius} fill={fillColor} />
@@ -60,7 +60,7 @@ export function RightJoinSVG() {
   );
 }
 
-export function OuterJoinSVG() {
+export const OuterJoinSVG: FC = () => {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <circle cx={centerX1} cy={centerY} r={radius} fill={fillColor} />

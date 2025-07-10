@@ -1,7 +1,24 @@
 import { useState } from 'react';
 import { InnerJoinSVG, LeftJoinSVG, RightJoinSVG, OuterJoinSVG } from './JoinSVG';
 
-const usersData = [
+interface User {
+  id: number;
+  name: string;
+}
+
+interface Like {
+  user_id: number;
+  like: string;
+}
+
+interface JoinResult {
+  name: string;
+  like: string;
+}
+
+type JoinType = 'inner' | 'left' | 'right' | 'outer';
+
+const usersData: User[] = [
   { id: 1, name: 'Patrik' },
   { id: 2, name: 'Albert' },
   { id: 3, name: 'Maria' },
@@ -9,7 +26,7 @@ const usersData = [
   { id: 5, name: 'Elizabeth' }
 ];
 
-const likesData = [
+const likesData: Like[] = [
   { user_id: 3, like: 'Stars' },
   { user_id: 1, like: 'Climbing' },
   { user_id: 1, like: 'Code' },
@@ -17,7 +34,7 @@ const likesData = [
   { user_id: 4, like: 'Apples' }
 ];
 
-const sqlInfo = {
+const sqlInfo: Record<JoinType, { query: string; desc: string }> = {
   inner: {
     query: "SELECT users.name, likes.like FROM users JOIN likes ON users.id = likes.user_id;",
     desc: "INNER JOIN or just JOIN retrieves all users and likes that match each other (where the id field in users matches a user_id in the likes table and vice versa)"
@@ -36,11 +53,10 @@ const sqlInfo = {
   }
 };
 
-function getJoins(users, likes, type) {
-  // Helper to get join results and user_ids based on type
-  const userMap = Object.fromEntries(users.map(u => [u.id, u.name]));
-  let result = [];
-  let user_ids = [];
+function getJoins(users: User[], likes: Like[], type: JoinType): { result: JoinResult[]; user_ids: number[] } {
+  const userMap: Record<number, string> = Object.fromEntries(users.map(u => [u.id, u.name]));
+  let result: JoinResult[] = [];
+  let user_ids: number[] = [];
   if (type === 'inner') {
     result = likes
       .filter(l => userMap[l.user_id])
@@ -63,7 +79,6 @@ function getJoins(users, likes, type) {
       return { name: userMap[l.user_id] || 'NULL', like: l.like };
     });
   } else if (type === 'outer') {
-    // Full outer join (simulate with left + right, remove duplicates)
     const left = users.map(u => {
       const userLikes = likes.filter(l => l.user_id === u.id);
       user_ids.push(u.id);
@@ -78,38 +93,37 @@ function getJoins(users, likes, type) {
         return { name: 'NULL', like: l.like };
       }
       return null;
-    }).filter(Boolean);
+    }).filter(Boolean) as JoinResult[];
     result = [...left, ...right];
   }
   return { result, user_ids };
 }
 
 function JoinsApp() {
-  const [users, setUsers] = useState(usersData);
-  const [likes, setLikes] = useState(likesData);
-  const [currentJoin, setCurrentJoin] = useState('inner');
+  const [users, setUsers] = useState<User[]>(usersData);
+  const [likes, setLikes] = useState<Like[]>(likesData);
+  const [currentJoin, setCurrentJoin] = useState<JoinType>('inner');
   const [showDesc, setShowDesc] = useState(false);
-  const [modalType, setModalType] = useState(null); // 'users' or 'likes' or null
+  const [modalType, setModalType] = useState<'users' | 'likes' | null>(null);
   const [addId, setAddId] = useState('');
   const [addName, setAddName] = useState('');
 
   const { result: joins, user_ids } = getJoins(users, likes, currentJoin);
 
-  // For likes: cross out if like.user_id is not in user_ids from join result
-  const isNotSelected = id => {
+  const isNotSelected = (id: number) => {
     if (!user_ids.includes(id)) return 'is-not-selected';
     return '';
   };
 
-  const currentJoinClass = join =>
+  const currentJoinClass = (join: JoinType) =>
     'join' + (currentJoin === join ? ' current-join' : '');
 
-  const selectJoin = join => {
+  const selectJoin = (join: JoinType) => {
     setCurrentJoin(join);
     setShowDesc(false);
   };
 
-  const removeItem = (type, idx) => {
+  const removeItem = (type: 'users' | 'likes', idx: number) => {
     if (type === 'users') {
       setUsers(users.filter((_, i) => i !== idx));
     } else {
@@ -117,13 +131,13 @@ function JoinsApp() {
     }
   };
 
-  const addModal = type => {
+  const addModal = (type: 'users' | 'likes') => {
     setModalType(type);
     setAddId('');
     setAddName('');
   };
 
-  const addItem = e => {
+  const addItem = (e: React.FormEvent) => {
     e.preventDefault();
     if (modalType === 'users') {
       if (!addId || !addName) return;
@@ -283,7 +297,7 @@ function JoinsApp() {
       )}
       {modalType && <div className="overlay" onClick={() => setModalType(null)}></div>}
       <div className="footer">
-        &copy; 2014 <a href="http://spathon.com">Spathon</a>
+        &copy; 2025 <a href="http://spathon.com">Spathon</a>
         <div className="pull-right">
           <a href="https://github.com/spathon/Visual-JOIN">Github</a>
         </div>

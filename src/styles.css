@@ -54,7 +54,7 @@ input { padding: 5px; border: 1px solid #ccc; border-radius: 4px; width: 160px; 
   border-radius: 4px 4px 0 4px; margin: 0 0 30px; box-shadow: inset 0 0 10px #eee }
 .sql-table:before { content: "SQL"; position: absolute; top: -14px; left: 50%; display: block;
   width: 46px; margin: 0 0 0 -23px; background: #fff; border: 1px solid #ddd;
-  border-radius: 4px; text-align: center; padding: 2px 0; z-index: 1; }
+  border-radius: 4px; text-align: center; padding: 2px 0; }
 .sql-table table { text-align: center; height: 80px; margin: 0; }
 .sql-table td { border: none; padding: 10px 0; vertical-align: middle; position: relative; }
 .sql { margin: 0 0 30px; text-align: center; color: #777; text-shadow: 1px 1px 0 #fff; }
