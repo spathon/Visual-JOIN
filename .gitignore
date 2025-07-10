@@ -1,1 +1,7 @@
 .DS_Store
+node_modules/
+tmp/
+dist/
+.vscode/
+*.log
+*.env
