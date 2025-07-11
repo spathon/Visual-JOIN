@@ -200,6 +200,7 @@ input[type="number"] {
   text-align: center;
   color: #777;
   text-shadow: 1px 1px 0 #fff;
+  white-space: pre-line;
 }
 
 .show-desc {
