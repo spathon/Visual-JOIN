@@ -1,12 +1,13 @@
 export interface User {
-  id: number;
-  name: string;
+  uuid: string
+  id: number
+  name: string
 }
 
 export interface Like {
-  user_id: number;
-  like: string;
+  uuid: string
+  user_id: number
+  like: string
 }
 
-
-export type JoinType = 'inner' | 'left' | 'right' | 'outer';
+export type JoinType = 'inner' | 'left' | 'right' | 'outer'

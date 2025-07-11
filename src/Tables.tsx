@@ -1,55 +1,55 @@
 import { useState } from 'react'
+import ModalAdd from './ModalAdd'
 import type { JoinType, Like, User } from './types'
 import getJoins from './utils/getJoins'
-import ModalAdd from './ModalAdd'
 
 const usersData: User[] = [
-  { id: 1, name: 'Patrik' },
-  { id: 2, name: 'Albert' },
-  { id: 3, name: 'Maria' },
-  { id: 4, name: 'Darwin' },
-  { id: 5, name: 'Elizabeth' }
-];
+  { uuid: crypto.randomUUID(), id: 1, name: 'Patrik' },
+  { uuid: crypto.randomUUID(), id: 2, name: 'Albert' },
+  { uuid: crypto.randomUUID(), id: 3, name: 'Maria' },
+  { uuid: crypto.randomUUID(), id: 4, name: 'Darwin' },
+  { uuid: crypto.randomUUID(), id: 5, name: 'Elizabeth' },
+]
 
 const likesData: Like[] = [
-  { user_id: 3, like: 'Stars' },
-  { user_id: 1, like: 'Climbing' },
-  { user_id: 1, like: 'Code' },
-  { user_id: 6, like: 'Rugby' },
-  { user_id: 4, like: 'Apples' }
-];
+  { uuid: crypto.randomUUID(), user_id: 3, like: 'Stars' },
+  { uuid: crypto.randomUUID(), user_id: 1, like: 'Climbing' },
+  { uuid: crypto.randomUUID(), user_id: 1, like: 'Code' },
+  { uuid: crypto.randomUUID(), user_id: 6, like: 'Rugby' },
+  { uuid: crypto.randomUUID(), user_id: 4, like: 'Apples' },
+]
 
-export default function Tables({ currentJoin }: { currentJoin: JoinType; }) {
-  const [users, setUsers] = useState<User[]>(usersData);
-  const [likes, setLikes] = useState<Like[]>(likesData);
-  const [modalType, setModalType] = useState<'users' | 'likes' | null>(null);
+export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
+  const [users, setUsers] = useState<User[]>(usersData)
+  const [likes, setLikes] = useState<Like[]>(likesData)
+  const [modalType, setModalType] = useState<'users' | 'likes' | null>(null)
 
-  const { result: joins, user_ids } = getJoins(users, likes, currentJoin);
+  const { result: joins, user_ids } = getJoins(users, likes, currentJoin)
 
   const addUser = (user: User) => {
-    setUsers((prev) => [...prev, user]);
-  };
+    setUsers((prev) => [...prev, user])
+  }
   const addLike = (like: Like) => {
-    setLikes((prev) => [...prev, like]);
-  };
-  const closeModal = () => setModalType(null);
+    setLikes((prev) => [...prev, like])
+  }
+  const closeModal = () => setModalType(null)
 
-  const removeItem = (type: 'users' | 'likes', idx: number) => {
+  const removeItem = (type: 'users' | 'likes', uuid: string) => {
     if (type === 'users') {
-      setUsers(users.filter((_, i) => i !== idx));
+      setUsers(users.filter((user) => user.uuid !== uuid))
     } else {
-      setLikes(likes.filter((_, i) => i !== idx));
+      setLikes(likes.filter((like) => like.uuid !== uuid))
     }
-  };
+  }
 
   const isNotSelected = (id: number) => {
-    if (!user_ids.includes(id)) return 'is-not-selected';
-    return '';
-  };
+    if (!user_ids.includes(id)) return 'is-not-selected'
+    return ''
+  }
 
   return (
     <>
-    <div className="row tables clearfix">
+      <div className="row tables clearfix">
         {/* Users */}
         <div className="col-sm-4">
           <h3>Users</h3>
@@ -61,18 +61,30 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType; }) {
               </tr>
             </thead>
             <tbody>
-              {users.map((user, idx) => (
+              {users.map((user) => (
                 <tr key={user.id} className={isNotSelected(user.id)}>
                   <td>{user.id}</td>
                   <td>
-                    <button type="button" className="pull-right danger" onClick={() => removeItem('users', idx)}>X</button>
+                    <button
+                      type="button"
+                      className="button pull-right danger"
+                      onClick={() => removeItem('users', user.uuid)}
+                    >
+                      X
+                    </button>
                     {user.name}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <button onClick={() => setModalType('users')}>Add</button>
+          <button
+            className="button"
+            type="button"
+            onClick={() => setModalType('users')}
+          >
+            Add
+          </button>
         </div>
         {/* Join */}
         <div className="col-sm-4 joins-table">
@@ -85,10 +97,14 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType; }) {
               </tr>
             </thead>
             <tbody>
-              {joins.map((join, idx) => (
-                <tr key={idx}>
-                  <td className={join.name === 'NULL' ? 'is-null' : ''}>{join.name}</td>
-                  <td className={join.like === 'NULL' ? 'is-null' : ''}>{join.like}</td>
+              {joins.map((join) => (
+                <tr key={join.uuid}>
+                  <td className={join.name === 'NULL' ? 'is-null' : ''}>
+                    {join.name}
+                  </td>
+                  <td className={join.like === 'NULL' ? 'is-null' : ''}>
+                    {join.like}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -105,18 +121,30 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType; }) {
               </tr>
             </thead>
             <tbody>
-              {likes.map((like, idx) => (
-                <tr key={idx} className={isNotSelected(like.user_id)}>
+              {likes.map((like) => (
+                <tr key={like.uuid} className={isNotSelected(like.user_id)}>
                   <td>{like.user_id}</td>
                   <td>
-                    <button type="button" className="pull-right danger" onClick={() => removeItem('likes', idx)}>X</button>
+                    <button
+                      type="button"
+                      className="button pull-right danger"
+                      onClick={() => removeItem('likes', like.uuid)}
+                    >
+                      X
+                    </button>
                     {like.like}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <button onClick={() => setModalType('likes')}>Add</button>
+          <button
+            className="button"
+            type="button"
+            onClick={() => setModalType('likes')}
+          >
+            Add
+          </button>
         </div>
       </div>
 
@@ -129,7 +157,17 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType; }) {
           closeModal={closeModal}
         />
       )}
-      {modalType && <div className="overlay" onClick={closeModal}></div>}
+
+      {modalType && (
+        // biome-ignore lint/a11y/useSemanticElements: Overlay
+        <div
+          className="overlay"
+          role="button"
+          tabIndex={0}
+          onKeyDown={closeModal}
+          onClick={closeModal}
+        ></div>
+      )}
     </>
-  );
+  )
 }
