@@ -8,7 +8,7 @@ body { background: #F5F5F5; color: #3F2629; font: 18px/1.4 'Open Sans', sans-ser
 a { color: #00A0B0; text-decoration: none; }
 
 h1, h2, h3, h4, h5, h6 { text-shadow: 1px 1px 0 #ddd; color: #8F252F; margin: 0 0 20px; }
-h1 { font-weight: bold; font-size: 55px; text-align: center;
+h1 { font-weight: 600; font-size: 55px; text-align: center;
   color: #8F252F; text-shadow: 2px 2px 0 #ddd; padding: 40px 0;
 }
 h1 span { font-size: 17px; display: block; color: #3F2629;}
@@ -23,7 +23,7 @@ th, td { border-bottom: 1px solid #ddd; }
 button { background: #5EC456; border: 1px solid #3E9436; color: #fff; text-shadow: 1px 1px 0 #3E9436;
   padding: 3px 7px; border-radius: 4px; }
 button:hover { background: #4Eb446; }
-.danger { background: #C1353E; border-color: #a11413; text-shadow: 1px 1px 0 #a11413; padding: 0 5px; font-weight: bold; font-size: 14px; margin-top: 2px; }
+.danger { background: #C1353E; border-color: #a11413; text-shadow: 1px 1px 0 #a11413; padding: 0 5px; font-weight: 600; font-size: 14px; margin-top: 2px; }
 .danger:hover { background: #b1252E; }
 input { padding: 5px; border: 1px solid #ccc; border-radius: 4px; width: 160px; }
 .input-sm { width: 47px; }
@@ -73,7 +73,7 @@ input { padding: 5px; border: 1px solid #ccc; border-radius: 4px; width: 160px; 
 .like { color: #EB6841; }
 /* States */
 .is-null { color: #ccc; }
-.is-not-selected td { text-decoration: line-through; color: #777; font-weight: 200; }
+.is-not-selected td { text-decoration: line-through; color: #777; font-weight: 300; }
 
 
 
