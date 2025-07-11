@@ -87,8 +87,9 @@ function getJoins(users: User[], likes: Like[], type: JoinType): { result: JoinR
       }
       return userLikes.map(l => ({ name: u.name, like: l.like }));
     }).flat();
+    const existingUserIds = [...user_ids]
     const right = likes.map(l => {
-      if (!user_ids.includes(l.user_id)) {
+      if (!existingUserIds.includes(l.user_id)) {
         user_ids.push(l.user_id);
         return { name: 'NULL', like: l.like };
       }
