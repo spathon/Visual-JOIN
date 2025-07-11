@@ -16,7 +16,7 @@ h2 { font-size: 22px; }
 
 table { width: 100%; margin: 0 0 30px; }
 th { text-align: left; }
-tr:nth-of-type(even) td { background: #fafafa; }
+.tables tr:nth-of-type(odd) td { background: #fafafa; }
 th, td { border-bottom: 1px solid #ddd; }
 
 /* Forms and buttons */
