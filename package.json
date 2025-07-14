@@ -12,16 +12,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vitejs/plugin-react": "^4.6.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "vite": "^7.0.4"
+    "preact": "^10.26.9",
+    "preact-iso": "^2.9.2",
+    "preact-render-to-string": "^6.5.13"
   },
   "type": "module",
   "devDependencies": {
     "@biomejs/biome": "~2.1.1",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "typescript": "^5.8.3"
+    "@preact/preset-vite": "^2.10.2",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.4"
   }
 }

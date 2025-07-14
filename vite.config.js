@@ -1,10 +1,17 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import preact from '@preact/preset-vite'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    preact({
+      prerender: {
+        enabled: true,
+        renderTarget: '#root',
+      },
+    }),
+  ],
   build: {
     outDir: './dist',
     emptyOutDir: true,
   },
-});
+})

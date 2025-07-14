@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'preact/hooks'
 import ModalAdd from './ModalAdd'
 import type { JoinType, Like, User } from './types'
 import getJoins from './utils/getJoins'

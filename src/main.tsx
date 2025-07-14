@@ -1,9 +1,12 @@
-import { createRoot } from 'react-dom/client'
+import { hydrate, prerender as ssr } from 'preact-iso'
 import JoinsApp from './JoinsApp'
 
-const container = document.getElementById('root')
-if (!container) {
-  throw new Error('Root container not found')
+if (typeof window !== 'undefined') {
+  const $root = document.getElementById('root')
+  if (!$root) throw new Error('Root element not found')
+  hydrate(<JoinsApp />, $root)
 }
-const root = createRoot(container)
-root.render(<JoinsApp />)
+
+export async function prerender(data: object) {
+  return await ssr(<JoinsApp {...data} />)
+}

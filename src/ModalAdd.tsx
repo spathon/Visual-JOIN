@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import type { JSX } from 'preact'
+import { useState } from 'preact/hooks'
 import type { Like, User } from './types'
 
 type ModalTypes = 'users' | 'likes' | null
@@ -16,8 +17,7 @@ export default function ModalAdd({
 }) {
   const [addId, setAddId] = useState('')
   const [addName, setAddName] = useState('')
-
-  const addItem = (e: React.FormEvent) => {
+  const addItem = (e: JSX.TargetedEvent<HTMLFormElement, Event>) => {
     e.preventDefault()
     if (modalType === 'users') {
       if (!addId || !addName) return
@@ -41,7 +41,7 @@ export default function ModalAdd({
           required
           step="1"
           value={addId}
-          onChange={(e) => setAddId(e.target.value)}
+          onInput={(e) => setAddId(e.currentTarget.value)}
           placeholder="ID"
           className="input-sm"
         />
@@ -49,7 +49,7 @@ export default function ModalAdd({
           type="text"
           required
           value={addName}
-          onChange={(e) => setAddName(e.target.value)}
+          onInput={(e) => setAddName(e.currentTarget.value)}
           placeholder={modalType === 'likes' ? 'Like' : 'Name'}
         />
         <button className="button" type="submit">
