@@ -35,7 +35,7 @@ export default function ModalAdd({
 
   return (
     <div className="modal" style={{ display: 'block' }}>
-      <form onSubmit={addItem}>
+      <form onSubmit={addItem} className="add-form">
         <input
           type="number"
           required

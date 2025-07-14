@@ -1,7 +1,11 @@
 @import "reset.css";
 
+html {
+  background: linear-gradient(#eee, #f9f9f9);
+  min-height: 100%;
+}
+
 body {
-  background: #f5f5f5;
   color: #3f2629;
   font:
     18px / 1.4 "Open Sans",
@@ -21,28 +25,23 @@ h5,
 h6 {
   text-shadow: 1px 1px 0 #ddd;
   color: #8f252f;
-  margin: 0 0 20px;
+  margin: 0 0 0;
 }
 h1 {
   font-weight: 600;
   font-size: 55px;
-  text-align: center;
-  color: #8f252f;
-  text-shadow: 2px 2px 0 #ddd;
-  padding: 40px 0;
-}
-h1 span {
-  font-size: 17px;
-  display: block;
-  color: #3f2629;
 }
 h2 {
   font-size: 22px;
+}
+h3 {
+  margin-bottom: 1rem;
 }
 
 table {
   width: 100%;
   margin: 0 0 30px;
+  border-collapse: collapse;
 }
 th {
   text-align: left;
@@ -50,9 +49,29 @@ th {
 th,
 td {
   border-bottom: 1px solid #ddd;
+  padding: 2px;
 }
 
-/* Forms and buttons */
+input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 160px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+input[type="number"] {
+  appearance: textfield; /* Firefox */
+  -moz-appearance: textfield; /* Firefox */
+}
+
+/**
+ * Buttons
+ */
 .button-reset {
   background: none;
   border: none;
@@ -74,6 +93,8 @@ td {
   text-shadow: 1px 1px 0 #3e9436;
   padding: 3px 7px;
   border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none !important;
 }
 .button:hover {
   background: #4eb446;
@@ -90,59 +111,49 @@ td {
 .danger:hover {
   background: #b1252e;
 }
-input {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 160px;
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  /* display: none; <- Crashes Chrome on hover */
-  -webkit-appearance: none;
-  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-}
-input[type="number"] {
-  appearance: textfield; /* Firefox */
-  -moz-appearance: textfield; /* Firefox */
-}
-.input-sm {
-  width: 47px;
+
+/**
+ * Layout
+ */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
-/* Helper classes */
-.clearfix:before,
-.clearfix:after {
-  content: " ";
-  display: table;
-}
-.clearfix:after {
-  clear: both;
-}
-.text-right {
-  text-align: right;
-}
-.pull-right {
-  float: right;
-}
-
-/* JOINS */
-.joins {
+/**
+ * Header
+ */
+.header {
+  padding: 40px 0 60px;
   text-align: center;
-  margin: 0 0 30px;
+  text-shadow: 2px 2px 0 #ddd;
 }
-.joins h2 {
-  margin: 0;
-  color: #6a4a3c;
+
+.header span {
+  font-weight: 600;
+  font-size: 17px;
+  display: block;
+  color: #3f2629;
+  text-shadow: 1px 1px 0 #ddd;
 }
-.subtitle {
-  font-size: 12px;
-  color: #999;
-  margin: 0 0 10px;
+
+/**
+ * Joins Section
+ */
+.joins {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 2rem;
 }
 
 .join {
-  width: 100%;
+  flex-grow: 1;
   padding: 10px;
   border: 1px solid transparent;
   transition:
@@ -159,18 +170,30 @@ input[type="number"] {
   border-color: #ddd;
   border-radius: 4px;
 }
+.subtitle {
+  font-size: 12px;
+  color: #999;
+  margin: 0 0 10px;
+}
+.join svg {
+  display: block;
+  margin: 0 auto 5px;
+}
 
-/* SQL */
-.sql-table {
+/**
+ * SQL
+ */
+.sql-container {
   font-size: 14px;
   background: #fff;
   border: 1px solid #ddd;
   position: relative;
   border-radius: 4px 4px 0 4px;
-  margin: 0 0 30px;
+  margin: 0 0 2rem;
   box-shadow: inset 0 0 10px #eee;
+  text-align: center;
 }
-.sql-table:before {
+.sql-container:before {
   content: "SQL";
   position: absolute;
   top: -14px;
@@ -184,19 +207,12 @@ input[type="number"] {
   text-align: center;
   padding: 2px 0;
 }
-.sql-table table {
-  text-align: center;
-  height: 80px;
-  margin: 0;
-}
-.sql-table td {
-  border: none;
-  padding: 10px 0;
-  vertical-align: middle;
-  position: relative;
-}
 .sql {
-  margin: 0 0 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px;
+  min-height: 90px;
   text-align: center;
   color: #777;
   text-shadow: 1px 1px 0 #fff;
@@ -219,26 +235,37 @@ input[type="number"] {
   cursor: pointer;
 }
 .desc {
-  display: block;
   padding: 15px 0;
   border-top: 1px dashed #ddd;
-  margin: 15px 20px 0;
+  margin: 0 20px;
   color: #444;
 }
 
-/* Tables */
+/**
+ * Tables
+ */
 .tables {
-  margin: 0 0 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 0 0 2rem;
+}
+.tables-col {
+  flex: 1;
+  min-width: 300px;
 }
 .tables tr:nth-of-type(odd) td {
   background: #fafafa;
 }
-.tables button {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s;
+@media (hover: hover) {
+  .tables button {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
 }
-.tables > div:hover button {
+
+.tables-col:hover button {
   pointer-events: auto;
   opacity: 1;
 }
@@ -258,33 +285,44 @@ input[type="number"] {
   font-weight: 300;
 }
 
-/* Footer */
+/**
+ * Footer
+ */
 .footer {
+  display: flex;
+  justify-content: space-between;
   font-size: 14px;
   color: #777;
   border-top: 1px solid #ddd;
-  padding: 10px 15px 30px;
+  padding: 15px;
 }
 
-/* Modals */
+/**
+ * Modal
+ */
 .overlay {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   background: rgba(0, 0, 0, 0.5);
 }
 .modal {
   position: fixed;
+  z-index: 1000;
   top: 50%;
   left: 50%;
-  z-index: 10;
-  width: 300px;
-  margin: -40px 0 0 -150px;
+  transform: translate3d(-50%, -50%, 0);
   padding: 15px;
   border: 2px solid #6a4a3c;
   background: #fff;
   border-radius: 8px;
   box-shadow: inset 0 0 6px #888;
+}
+
+.input-sm {
+  width: 47px;
+}
+
+.add-form {
+  display: flex;
+  gap: 10px;
 }

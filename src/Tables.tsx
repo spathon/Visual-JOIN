@@ -49,36 +49,39 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
 
   return (
     <>
-      <div className="row tables clearfix">
+      <div className="tables">
         {/* Users */}
-        <div className="col-sm-4">
+        <div className="tables-col">
           <h3>Users</h3>
           <table>
             <thead>
               <tr>
                 <th>ID</th>
                 <th className="user">Name</th>
+                <th>&nbsp;</th>
               </tr>
             </thead>
             <tbody>
               {users.map((user) => (
                 <tr key={user.id} className={isNotSelected(user.id)}>
                   <td>{user.id}</td>
-                  <td>
+                  <td>{user.name}</td>
+                  <td width="1">
                     <button
+                      aria-label="Remove user"
                       type="button"
-                      className="button pull-right danger"
+                      className="button danger"
                       onClick={() => removeItem('users', user.uuid)}
                     >
-                      X
+                      &#10005;
                     </button>
-                    {user.name}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
           <button
+            aria-label="Add user"
             className="button"
             type="button"
             onClick={() => setModalType('users')}
@@ -86,8 +89,9 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
             Add
           </button>
         </div>
+
         {/* Join */}
-        <div className="col-sm-4 joins-table">
+        <div className="tables-col">
           <h3>JOIN</h3>
           <table>
             <thead>
@@ -110,8 +114,9 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
             </tbody>
           </table>
         </div>
+
         {/* Likes */}
-        <div className="col-sm-4">
+        <div className="tables-col">
           <h3>Likes</h3>
           <table>
             <thead>
@@ -124,21 +129,23 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
               {likes.map((like) => (
                 <tr key={like.uuid} className={isNotSelected(like.user_id)}>
                   <td>{like.user_id}</td>
-                  <td>
+                  <td>{like.like}</td>
+                  <td width="1">
                     <button
+                      aria-label="Remove like"
                       type="button"
-                      className="button pull-right danger"
+                      className="button danger"
                       onClick={() => removeItem('likes', like.uuid)}
                     >
-                      X
+                      &#10005;
                     </button>
-                    {like.like}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
           <button
+            aria-label="Add like"
             className="button"
             type="button"
             onClick={() => setModalType('likes')}

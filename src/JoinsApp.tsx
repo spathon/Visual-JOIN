@@ -44,15 +44,18 @@ function JoinsApp() {
   }
 
   return (
-    <div className="container">
-      <h1 className="title">
-        Visual JOIN
+    <>
+      {/* Header */}
+      <div className="header">
+        <h1>Visual JOIN</h1>
         <span>
           Understand how joins work by interacting and see it visually
         </span>
-      </h1>
-      <div className="row joins clearfix">
-        <div className="col-xs-3">
+      </div>
+
+      <div className="content">
+        {/* Joins */}
+        <div className="joins">
           <button
             type="button"
             className={currentJoinClass('inner')}
@@ -62,8 +65,6 @@ function JoinsApp() {
             <div className="subtitle">(or JOIN)</div>
             <InnerJoinSVG />
           </button>
-        </div>
-        <div className="col-xs-3">
           <button
             type="button"
             className={currentJoinClass('left')}
@@ -73,8 +74,6 @@ function JoinsApp() {
             <div className="subtitle">&nbsp;</div>
             <LeftJoinSVG />
           </button>
-        </div>
-        <div className="col-xs-3">
           <button
             type="button"
             className={currentJoinClass('right')}
@@ -84,8 +83,6 @@ function JoinsApp() {
             <div className="subtitle">&nbsp;</div>
             <RightJoinSVG />
           </button>
-        </div>
-        <div className="col-xs-3">
           <button
             type="button"
             className={currentJoinClass('outer')}
@@ -96,41 +93,32 @@ function JoinsApp() {
             <OuterJoinSVG />
           </button>
         </div>
-      </div>
-      <div className="line"></div>
-      <div className="col-xs-12">
-        <div className="sql-table">
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <span className="sql">{sqlInfo[currentJoin].query}</span>
-                  <button
-                    type="button"
-                    className="show-desc"
-                    onClick={() => setShowDesc(!showDesc)}
-                  >
-                    {showDesc ? 'Hide description »' : 'Description »'}
-                  </button>
-                  {showDesc && (
-                    <span className="desc">{sqlInfo[currentJoin].desc}</span>
-                  )}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+
+        {/* SQL Query and Description */}
+        <div className="sql-container">
+          <div className="sql">{sqlInfo[currentJoin].query}</div>
+          <button
+            type="button"
+            className="show-desc"
+            onClick={() => setShowDesc(!showDesc)}
+          >
+            {showDesc ? 'Hide description »' : 'Description »'}
+          </button>
+          {showDesc && <div className="desc">{sqlInfo[currentJoin].desc}</div>}
         </div>
+
+        {/* Tables */}
+        <Tables currentJoin={currentJoin} />
       </div>
 
-      <Tables currentJoin={currentJoin} />
-
+      {/* Footer */}
       <div className="footer">
-        &copy; 2025 <a href="http://spathon.com">Spathon</a>
-        <div className="pull-right">
-          <a href="https://github.com/spathon/Visual-JOIN">Github</a>
-        </div>
+        <span>
+          &copy; 2025 <a href="http://spathon.com">Spathon</a>
+        </span>
+        <a href="https://github.com/spathon/Visual-JOIN">Github</a>
       </div>
-    </div>
+    </>
   )
 }
 
