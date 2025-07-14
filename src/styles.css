@@ -1,0 +1,328 @@
+@import "reset.css";
+
+html {
+  background: linear-gradient(#eee, #f9f9f9);
+  min-height: 100%;
+}
+
+body {
+  color: #3f2629;
+  font:
+    18px / 1.4 "Open Sans",
+    sans-serif;
+}
+
+a {
+  color: #00a0b0;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-shadow: 1px 1px 0 #ddd;
+  color: #8f252f;
+  margin: 0 0 0;
+}
+h1 {
+  font-weight: 600;
+  font-size: 55px;
+}
+h2 {
+  font-size: 22px;
+}
+h3 {
+  margin-bottom: 1rem;
+}
+
+table {
+  width: 100%;
+  margin: 0 0 30px;
+  border-collapse: collapse;
+}
+th {
+  text-align: left;
+}
+th,
+td {
+  border-bottom: 1px solid #ddd;
+  padding: 2px;
+}
+
+input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 160px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+input[type="number"] {
+  appearance: textfield; /* Firefox */
+  -moz-appearance: textfield; /* Firefox */
+}
+
+/**
+ * Buttons
+ */
+.button-reset {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+  color: inherit;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer; /* or default if you want it to behave like a div */
+  display: block; /* or inline-block, flex, etc. as needed */
+}
+.button {
+  background: #5ec456;
+  border: 1px solid #3e9436;
+  color: #fff;
+  text-shadow: 1px 1px 0 #3e9436;
+  padding: 3px 7px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none !important;
+}
+.button:hover {
+  background: #4eb446;
+}
+.danger {
+  background: #c1353e;
+  border-color: #a11413;
+  text-shadow: 1px 1px 0 #a11413;
+  padding: 0 5px;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 2px;
+}
+.danger:hover {
+  background: #b1252e;
+}
+
+/**
+ * Layout
+ */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+/**
+ * Header
+ */
+.header {
+  padding: 40px 0 60px;
+  text-align: center;
+  text-shadow: 2px 2px 0 #ddd;
+}
+
+.header span {
+  font-weight: 600;
+  font-size: 17px;
+  display: block;
+  color: #3f2629;
+  text-shadow: 1px 1px 0 #ddd;
+}
+
+/**
+ * Joins Section
+ */
+.joins {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 2rem;
+}
+
+.join {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid transparent;
+  transition:
+    transform 0.4s,
+    background 0.2s;
+}
+.join:hover {
+  transform: scale(1.1);
+}
+.join:hover,
+.current-join {
+  cursor: pointer;
+  background: #fff;
+  border-color: #ddd;
+  border-radius: 4px;
+}
+.subtitle {
+  font-size: 12px;
+  color: #999;
+  margin: 0 0 10px;
+}
+.join svg {
+  display: block;
+  margin: 0 auto 5px;
+}
+
+/**
+ * SQL
+ */
+.sql-container {
+  font-size: 14px;
+  background: #fff;
+  border: 1px solid #ddd;
+  position: relative;
+  border-radius: 4px 4px 0 4px;
+  margin: 0 0 2rem;
+  box-shadow: inset 0 0 10px #eee;
+  text-align: center;
+}
+.sql-container:before {
+  content: "SQL";
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  display: block;
+  width: 46px;
+  margin: 0 0 0 -23px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+  padding: 2px 0;
+}
+.sql {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px;
+  min-height: 90px;
+  text-align: center;
+  color: #777;
+  text-shadow: 1px 1px 0 #fff;
+  white-space: pre-line;
+}
+
+.show-desc {
+  position: absolute;
+  bottom: -24px;
+  right: -1px;
+  padding: 1px 5px 3px;
+  border-radius: 0 0 4px 4px;
+  color: #00a0b0;
+  border: 1px solid #ddd;
+  border-top: none;
+  background: #f9f9f9;
+}
+.show-desc:hover {
+  color: #eb6841;
+  cursor: pointer;
+}
+.desc {
+  padding: 15px 0;
+  border-top: 1px dashed #ddd;
+  margin: 0 20px;
+  color: #444;
+}
+
+/**
+ * Tables
+ */
+.tables {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 0 0 2rem;
+}
+.tables-col {
+  flex: 1;
+  min-width: 300px;
+}
+.tables tr:nth-of-type(odd) td {
+  background: #fafafa;
+}
+@media (hover: hover) {
+  .tables button {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+}
+
+.tables-col:hover button {
+  pointer-events: auto;
+  opacity: 1;
+}
+.user {
+  color: #00a0b0;
+}
+.like {
+  color: #eb6841;
+}
+/* States */
+.is-null {
+  color: #ccc;
+}
+.is-not-selected td {
+  text-decoration: line-through;
+  color: #777;
+  font-weight: 300;
+}
+
+/**
+ * Footer
+ */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #777;
+  border-top: 1px solid #ddd;
+  padding: 15px;
+}
+
+/**
+ * Modal
+ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.modal {
+  position: fixed;
+  z-index: 1000;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  padding: 15px;
+  border: 2px solid #6a4a3c;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: inset 0 0 6px #888;
+}
+
+.input-sm {
+  width: 47px;
+}
+
+.add-form {
+  display: flex;
+  gap: 10px;
+}

@@ -1,201 +1,33 @@
 <!DOCTYPE html>
-<html ng-app="joinApp">
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Visual JOIN</title>
-    <meta name="description" content="">
+    <meta name="description" content="Understand how joins work by interacting and see it visually">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
-    <link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196">
-    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
-    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-    <meta name="msapplication-TileColor" content="#cc333f">
-    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..600&display=swap" rel="stylesheet">
 
-    <!--link rel="stylesheet" href="css/bootstrap.min.css"-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/styles.css">
-
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7N1M7E4XTY"></script>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-      ga('create', 'UA-3962579-3', 'spathon.com');
-      ga('send', 'pageview');
-
+      gtag('config', 'G-7N1M7E4XTY');
     </script>
-
+    <link rel="stylesheet" href="/src/styles.css">
   </head>
-  <body ng-controller="JoinsCtrl">
-    <!--[if lt IE 9]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
-
-
-    <div class="container">
-
-      <h1 class="title">
-        Visual JOIN
-        <span>Understand how joins work by interacting and see it visually</span>
-      </h1>
-
-      <div class="row joins clearfix">
-        <div class="col-xs-3">
-          <div class="join" ng-class="currentJoinClass('inner')" ng-click="selectJoin('inner')">
-            <h2 title="{{sql.inner}}">INNER JOIN</h2>
-            <div class="subtitle">(or JOIN)</div>
-            <svg id="inner"></svg>
-          </div>
-        </div>
-        <div class="col-xs-3">
-          <div class="join" ng-class="currentJoinClass('left')" ng-click="selectJoin('left')">
-            <h2>LEFT JOIN</h2>
-            <div class="subtitle">&nbsp;</div>
-            <svg id="left"></svg>
-          </div>
-        </div>
-        <div class="col-xs-3">
-          <div class="join" ng-class="currentJoinClass('right')" ng-click="selectJoin('right')">
-            <h2>RIGHT JOIN</h2>
-            <div class="subtitle">&nbsp;</div>
-            <svg id="right"></svg>
-          </div>
-        </div>
-        <div class="col-xs-3">
-          <div class="join" ng-class="currentJoinClass('outer')" ng-click="selectJoin('outer')">
-            <h2>OUTER JOIN</h2>
-            <div class="subtitle">(with UNION)</div>
-            <svg id="outer"></svg>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="line"></div>
-
-      <div class="col-xs-12">
-        <div class="sql-table">
-          <table>
-            <tr>
-              <td>
-                <span class="sql" ng-bind-html="sql[current_join].query"></span>
-                <span class="show-desc" ng-click="sql.toggle_desc()">
-                  <span ng-hide="sql.show_desc">Description &raquo;</span>
-                  <span ng-show="sql.show_desc">Hide description &raquo;</span>
-                </span>
-                <span class="desc" ng-show="sql.show_desc">{{ sql[current_join].desc }}</span>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
-
-      <div class="row tables clearfix">
-
-        <!-- Users -->
-        <div class="col-sm-4">
-          <h3>Users</h3>
-          <table>
-            <tr>
-              <th>ID</th>
-              <th class="user">Name</th>
-            </tr>
-            <tr ng-class="isNotSelected(user.id)" ng-repeat="user in users">
-              <td>{{user.id}}</td>
-              <td>
-                <button type="button" ng-click="removeItem('users', $index)"
-                  class="pull-right danger">X</button>
-                {{user.name}}
-              </td>
-            </tr>
-          </table>
-          <button ng-click="addModal('users')">Add</button>
-        </div>
-
-        <!-- Join -->
-        <div class="col-sm-4 joins-table">
-          <h3>JOIN</h3>
-          <table>
-            <tr>
-              <th class="user">Name</th>
-              <th class="like">Like</th>
-            </tr>
-            <tr ng-repeat="join in joins">
-              <td ng-class="{ 'is-null': (join.name == 'NULL') }">{{ join.name }}</td>
-              <td ng-class="{ 'is-null': (join.like == 'NULL') }">{{ join.like }}</td>
-            </tr>
-          </table>
-        </div>
-
-        <!-- Likes -->
-        <div class="col-sm-4">
-          <h3>Likes</h3>
-          <table>
-            <tr>
-              <th>User ID</th>
-              <th class="like">Like</th>
-            </tr>
-            <tr ng-class="isNotSelected(like.user_id)" ng-repeat="like in likes">
-              <td>{{ like.user_id }}</td>
-              <td>
-                <button type="button" ng-click="removeItem('likes', $index)"
-                  class="pull-right danger">X</button>
-                {{ like.like }}
-              </td>
-            </tr>
-          </table>
-
-          <button ng-click="addModal('likes')">Add</button>
-        </div>
-
-      </div>
-
-
-      <div class="modal" ng-show="modalType">
-        <form ng-submit="addItem()" ng-show="modalType == 'add'">
-          <input type="text" id="addId" ng-model="addId" placeholder="ID" class="input-sm">
-          <input type="text" ng-model="addName" placeholder="{{ (type == 'likes') ? 'Like' : 'Name' }}">
-          <button type="submit">Add</button>
-        </form>
-      </div>
-
-      <div class="overlay" ng-show="modalType" ng-click="modalType=false"></div>
-
-
-
-      <div class="footer">
-        &copy; 2014 <a href="http://spathon.com">Spathon</a>
-        <div class="pull-right">
-          <a href="https://github.com/spathon/Visual-JOIN">Github</a>
-        </div>
-      </div>
-
-    </div> <!-- /.container -->
-
-    <!--script src="js/angular.min.js"></script>
-    <script src="js/angular-sanitize.min.js"></script-->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
-    <script src="https://code.angularjs.org/1.2.16/angular-sanitize.min.js"></script>
-    <!--script src="js/JoinsCtrl.js"></script>
-    <script src="js/snap.svg-min.js"></script-->
-    <script src="https://cdn.jsdelivr.net/snap.svg/0.2.0/snap.svg-min.js"></script>
-    <script src="js/main.js"></script>
-
+  <body>
+    <div id="root" class="container"></div>
+    <script prerender type="module" src="/src/main.tsx"></script>
   </body>
 </html>

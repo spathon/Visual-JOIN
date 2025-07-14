@@ -1,0 +1,15 @@
+/* TEAM */
+  Creator: Patrik Spathon
+  Site: http://spathon.com
+  Twitter: @spathon
+  Bluesky: @spathon.com
+  Location: Chamonix, France / Stockholm, Sweden
+
+/* SITE */
+  Last update: 2025/07/11
+  Language: English
+  Standards: HTML5, CSS3
+  Doctype: HTML5
+  Components: React.js, Vite, Google font
+  IDE: VS Code
+  Software: Tower(git)

@@ -1,0 +1,26 @@
+{
+  "name": "visual-join",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "preact": "^10.26.9",
+    "preact-iso": "^2.9.2",
+    "preact-render-to-string": "^6.5.13"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@biomejs/biome": "~2.1.1",
+    "@preact/preset-vite": "^2.10.2",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.4"
+  }
+}
