@@ -94,6 +94,7 @@ input[type="number"] {
   padding: 3px 7px;
   border-radius: 4px;
   cursor: pointer;
+  /* biome-ignore lint/complexity/noImportantStyles: Don't remember */
   text-decoration: none !important;
 }
 .button:hover {
