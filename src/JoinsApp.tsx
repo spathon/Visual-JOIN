@@ -1,6 +1,7 @@
 import { useState } from 'preact/hooks'
 import {
   InnerJoinSVG,
+  LeftAntiJoinSVG,
   LeftJoinSVG,
   OuterJoinSVG,
   RightJoinSVG,
@@ -28,6 +29,11 @@ const sqlInfo: Record<JoinType, { query: string; desc: string }> = {
     query:
       'SELECT users.name, likes.like FROM users LEFT OUTER JOIN likes ON users.id = likes.user_id\nUNION\nSELECT users.name, likes.like FROM users RIGHT OUTER JOIN likes ON users.id = likes.user_id',
     desc: "OUTER JOIN or OUTER LEFT and RIGHT with UNION (MySQL doesn't support FULL OUTER JOIN) retrieves all users and likes, matches them, and sets NULL on any like without a match on user, and vice versa with any user that has no matching like",
+  },
+  leftanti: {
+    query:
+      'SELECT users.name FROM users LEFT JOIN likes ON users.id = likes.user_id WHERE likes.user_id IS NULL;',
+    desc: 'LEFT ANTI JOIN finds users that have NO matching likes. It uses LEFT JOIN with a WHERE IS NULL clause to filter out all matches, keeping only the unmatched rows from the left table (users with no likes)',
   },
 }
 
@@ -73,6 +79,15 @@ function JoinsApp() {
             <h2>LEFT JOIN</h2>
             <div className="subtitle">&nbsp;</div>
             <LeftJoinSVG />
+          </button>
+          <button
+            type="button"
+            className={currentJoinClass('leftanti')}
+            onClick={() => selectJoin('leftanti')}
+          >
+            <h2>LEFT ANTI JOIN</h2>
+            <div className="subtitle">(with WHERE IS NULL)</div>
+            <LeftAntiJoinSVG />
           </button>
           <button
             type="button"

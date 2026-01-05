@@ -65,6 +65,17 @@ export default function getJoins(
       })
       .filter((val) => val !== null)
     result = [...left, ...right]
+  } else if (type === 'leftanti') {
+    // LEFT ANTI JOIN: Find users that have NO matching likes
+    result = users
+      .filter((u) => {
+        const hasLikes = likes.some((l) => l.user_id === u.id)
+        return !hasLikes
+      })
+      .map((u) => {
+        user_ids.push(u.id)
+        return { uuid: u.uuid, name: u.name, like: 'NULL' }
+      })
   }
   return { result, user_ids }
 }

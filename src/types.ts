@@ -10,4 +10,4 @@ export interface Like {
   like: string
 }
 
-export type JoinType = 'inner' | 'left' | 'right' | 'outer'
+export type JoinType = 'inner' | 'left' | 'right' | 'outer' | 'leftanti'
