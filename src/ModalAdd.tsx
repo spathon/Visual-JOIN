@@ -1,35 +1,41 @@
 import type { JSX } from 'preact'
 import { useState } from 'preact/hooks'
+import { MODAL_TYPES, type ModalType } from './constants'
 import type { Like, User } from './types'
-
-type ModalTypes = 'users' | 'likes' | null
 
 export default function ModalAdd({
   modalType,
   addUser,
   addLike,
   closeModal,
+  defaultId,
 }: {
-  modalType: ModalTypes
+  modalType: ModalType
   addUser: (user: User) => void
   addLike: (like: Like) => void
   closeModal: () => void
+  defaultId: number
 }) {
-  const [addId, setAddId] = useState('')
+  const [addId, setAddId] = useState(String(defaultId))
   const [addName, setAddName] = useState('')
+
   const addItem = (e: JSX.TargetedEvent<HTMLFormElement, Event>) => {
     e.preventDefault()
-    if (modalType === 'users') {
-      if (!addId || !addName) return
-      addUser({ uuid: crypto.randomUUID(), id: Number(addId), name: addName })
-    } else if (modalType === 'likes') {
-      if (!addId || !addName) return
+
+    const parsedId = Number(addId)
+
+    if (modalType === MODAL_TYPES.USERS) {
+      addUser({ uuid: crypto.randomUUID(), id: parsedId, name: addName.trim() })
+    } else if (modalType === MODAL_TYPES.LIKES) {
       addLike({
         uuid: crypto.randomUUID(),
-        user_id: Number(addId),
-        like: addName,
+        user_id: parsedId,
+        like: addName.trim(),
       })
     }
+
+    setAddId('')
+    setAddName('')
     closeModal()
   }
 
@@ -39,6 +45,7 @@ export default function ModalAdd({
         <input
           type="number"
           required
+          min="1"
           step="1"
           value={addId}
           onInput={(e) => setAddId(e.currentTarget.value)}
@@ -48,9 +55,10 @@ export default function ModalAdd({
         <input
           type="text"
           required
+          pattern=".*\S.*"
           value={addName}
           onInput={(e) => setAddName(e.currentTarget.value)}
-          placeholder={modalType === 'likes' ? 'Like' : 'Name'}
+          placeholder={modalType === MODAL_TYPES.LIKES ? 'Like' : 'Name'}
         />
         <button className="button" type="submit">
           Add
