@@ -1,30 +1,28 @@
-import { useState } from 'preact/hooks'
+import { useMemo, useState } from 'preact/hooks'
+import {
+  INITIAL_LIKES,
+  INITIAL_USERS,
+  MODAL_TYPES,
+  type ModalType,
+} from './constants'
 import ModalAdd from './ModalAdd'
 import type { JoinType, Like, User } from './types'
 import getJoins from './utils/getJoins'
 
-const usersData: User[] = [
-  { uuid: crypto.randomUUID(), id: 1, name: 'Patrik' },
-  { uuid: crypto.randomUUID(), id: 2, name: 'Albert' },
-  { uuid: crypto.randomUUID(), id: 3, name: 'Maria' },
-  { uuid: crypto.randomUUID(), id: 4, name: 'Darwin' },
-  { uuid: crypto.randomUUID(), id: 5, name: 'Elizabeth' },
-]
-
-const likesData: Like[] = [
-  { uuid: crypto.randomUUID(), user_id: 3, like: 'Stars' },
-  { uuid: crypto.randomUUID(), user_id: 1, like: 'Climbing' },
-  { uuid: crypto.randomUUID(), user_id: 1, like: 'Code' },
-  { uuid: crypto.randomUUID(), user_id: 6, like: 'Rugby' },
-  { uuid: crypto.randomUUID(), user_id: 4, like: 'Apples' },
-]
-
+/**
+ * Tables component that displays Users, JOIN result, and Likes tables side-by-side
+ * Allows interactive adding/removing of data to see how join results change
+ */
 export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
-  const [users, setUsers] = useState<User[]>(usersData)
-  const [likes, setLikes] = useState<Like[]>(likesData)
-  const [modalType, setModalType] = useState<'users' | 'likes' | null>(null)
+  const [users, setUsers] = useState<User[]>(INITIAL_USERS)
+  const [likes, setLikes] = useState<Like[]>(INITIAL_LIKES)
+  const [modalType, setModalType] = useState<ModalType | null>(null)
 
-  const { result: joins, user_ids } = getJoins(users, likes, currentJoin)
+  // Memoize join computation to avoid unnecessary recalculations
+  const { result: joins, user_ids } = useMemo(
+    () => getJoins(users, likes, currentJoin),
+    [users, likes, currentJoin],
+  )
 
   const addUser = (user: User) => {
     setUsers((prev) => [...prev, user])
@@ -34,17 +32,19 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
   }
   const closeModal = () => setModalType(null)
 
-  const removeItem = (type: 'users' | 'likes', uuid: string) => {
-    if (type === 'users') {
+  const removeItem = (type: ModalType, uuid: string) => {
+    if (type === MODAL_TYPES.USERS) {
       setUsers(users.filter((user) => user.uuid !== uuid))
     } else {
       setLikes(likes.filter((like) => like.uuid !== uuid))
     }
   }
 
+  /**
+   * Returns className for rows that are not included in the current join
+   */
   const isNotSelected = (id: number) => {
-    if (!user_ids.includes(id)) return 'is-not-selected'
-    return ''
+    return user_ids.includes(id) ? '' : 'is-not-selected'
   }
 
   return (
@@ -63,7 +63,7 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr key={user.id} className={isNotSelected(user.id)}>
+                <tr key={user.uuid} className={isNotSelected(user.id)}>
                   <td>{user.id}</td>
                   <td>{user.name}</td>
                   <td width="1">
@@ -71,7 +71,7 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
                       aria-label="Remove user"
                       type="button"
                       className="button danger"
-                      onClick={() => removeItem('users', user.uuid)}
+                      onClick={() => removeItem(MODAL_TYPES.USERS, user.uuid)}
                     >
                       &#10005;
                     </button>
@@ -84,7 +84,7 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
             aria-label="Add user"
             className="button"
             type="button"
-            onClick={() => setModalType('users')}
+            onClick={() => setModalType(MODAL_TYPES.USERS)}
           >
             Add
           </button>
@@ -135,7 +135,7 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
                       aria-label="Remove like"
                       type="button"
                       className="button danger"
-                      onClick={() => removeItem('likes', like.uuid)}
+                      onClick={() => removeItem(MODAL_TYPES.LIKES, like.uuid)}
                     >
                       &#10005;
                     </button>
@@ -148,32 +148,40 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
             aria-label="Add like"
             className="button"
             type="button"
-            onClick={() => setModalType('likes')}
+            onClick={() => setModalType(MODAL_TYPES.LIKES)}
           >
             Add
           </button>
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Modal and Overlay */}
       {modalType && (
-        <ModalAdd
-          modalType={modalType}
-          addUser={addUser}
-          addLike={addLike}
-          closeModal={closeModal}
-        />
-      )}
-
-      {modalType && (
-        // biome-ignore lint/a11y/useSemanticElements: Overlay
-        <div
-          className="overlay"
-          role="button"
-          tabIndex={0}
-          onKeyDown={closeModal}
-          onClick={closeModal}
-        ></div>
+        <>
+          <ModalAdd
+            modalType={modalType}
+            addUser={addUser}
+            addLike={addLike}
+            closeModal={closeModal}
+            defaultId={
+              modalType === MODAL_TYPES.USERS
+                ? Math.max(0, ...users.map((u) => u.id)) + 1
+                : Math.max(0, ...likes.map((l) => l.user_id)) + 1
+            }
+          />
+          {/* biome-ignore lint/a11y/useSemanticElements: Overlay backdrop for modal */}
+          <div
+            className="overlay"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape' || e.key === 'Enter') {
+                closeModal()
+              }
+            }}
+            onClick={closeModal}
+          />
+        </>
       )}
     </>
   )

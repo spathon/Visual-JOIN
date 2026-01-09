@@ -129,3 +129,40 @@ export const OuterJoinSVG = () => {
     </svg>
   )
 }
+
+export const LeftAntiJoinSVG = () => {
+  return (
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+      <title>Left anti join</title>
+      <defs>
+        <mask id="leftAntiMask">
+          <rect width={width} height={height} fill="white" />
+          <circle cx={centerX2} cy={centerY} r={radius} fill="black" />
+        </mask>
+      </defs>
+      <circle
+        cx={centerX1}
+        cy={centerY}
+        r={radius}
+        fill={fillColor}
+        mask="url(#leftAntiMask)"
+      />
+      <circle
+        cx={centerX1}
+        cy={centerY}
+        r={radius}
+        fill="none"
+        stroke={strokeColorLeft}
+        strokeWidth={strokeWidth}
+      />
+      <circle
+        cx={centerX2}
+        cy={centerY}
+        r={radius}
+        fill="none"
+        stroke={strokeColorRight}
+        strokeWidth={strokeWidth}
+      />
+    </svg>
+  )
+}
