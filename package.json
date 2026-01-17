@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fontsource/open-sans": "^5.2.7",
     "preact": "^10.27.2",
     "preact-iso": "^2.10.0",
     "preact-render-to-string": "^6.6.1"
