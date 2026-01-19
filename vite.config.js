@@ -1,6 +1,5 @@
 import preact from '@preact/preset-vite'
 import { defineConfig } from 'vite'
-import viteCompression from 'vite-plugin-compression'
 
 export default defineConfig({
   plugins: [
@@ -9,20 +8,6 @@ export default defineConfig({
         enabled: true,
         renderTarget: '#root',
       },
-    }),
-    // Generate gzip compressed files
-    viteCompression({
-      algorithm: 'gzip',
-      ext: '.gz',
-      threshold: 1024, // Only compress files larger than 1KB
-      deleteOriginFile: false,
-    }),
-    // Generate brotli compressed files (better compression than gzip)
-    viteCompression({
-      algorithm: 'brotliCompress',
-      ext: '.br',
-      threshold: 1024,
-      deleteOriginFile: false,
     }),
   ],
   build: {
