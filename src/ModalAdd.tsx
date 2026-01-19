@@ -55,10 +55,11 @@ export default function ModalAdd({
         <input
           type="text"
           required
-          pattern=".*\S.*"
+          pattern="[A-Za-z\s\-']+"
           value={addName}
           onInput={(e) => setAddName(e.currentTarget.value)}
           placeholder={modalType === MODAL_TYPES.LIKES ? 'Like' : 'Name'}
+          title="Only Latin characters, spaces, hyphens, and apostrophes are allowed"
         />
         <button className="button" type="submit">
           Add
