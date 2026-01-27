@@ -1,5 +1,14 @@
 import { hydrate, prerender as ssr } from 'preact-iso'
+import { I18nProvider } from './i18n'
 import JoinsApp from './JoinsApp'
+
+function App() {
+  return (
+    <I18nProvider>
+      <JoinsApp />
+    </I18nProvider>
+  )
+}
 
 /**
  * Client-side hydration - attaches Preact to the pre-rendered HTML
@@ -7,7 +16,7 @@ import JoinsApp from './JoinsApp'
 if (typeof window !== 'undefined') {
   const $root = document.getElementById('root')
   if (!$root) throw new Error('Root element not found')
-  hydrate(<JoinsApp />, $root)
+  hydrate(<App />, $root)
 }
 
 /**
@@ -16,5 +25,5 @@ if (typeof window !== 'undefined') {
  * @returns Pre-rendered HTML string
  */
 export async function prerender(data?: Record<string, unknown>) {
-  return await ssr(<JoinsApp {...data} />)
+  return await ssr(<App {...data} />)
 }

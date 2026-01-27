@@ -11,34 +11,18 @@ export const MODAL_TYPES = {
 export type ModalType = (typeof MODAL_TYPES)[keyof typeof MODAL_TYPES]
 
 /**
- * SQL query information for each join type
+ * SQL queries for each join type (kept in English as they are code examples)
  */
-export const SQL_INFO: Record<JoinType, { query: string; desc: string }> = {
-  inner: {
-    query:
-      'SELECT users.name, likes.like FROM users JOIN likes ON users.id = likes.user_id;',
-    desc: 'INNER JOIN or just JOIN retrieves all users and likes that match each other (where the id field in users matches a user_id in the likes table and vice versa)',
-  },
-  left: {
-    query:
-      'SELECT users.name, likes.like FROM users LEFT JOIN likes ON users.id = likes.user_id;',
-    desc: "LEFT JOIN retrieves all users and its likes. If the like doesn't exist, it sets NULL in the like field",
-  },
-  right: {
-    query:
-      'SELECT users.name, likes.like FROM users RIGHT JOIN likes ON users.id = likes.user_id;',
-    desc: "RIGHT JOIN is like LEFT JOIN but retrieves all likes with all matching users or NULL if it doesn't have any matching user",
-  },
-  outer: {
-    query:
-      'SELECT users.name, likes.like FROM users LEFT OUTER JOIN likes ON users.id = likes.user_id\nUNION\nSELECT users.name, likes.like FROM users RIGHT OUTER JOIN likes ON users.id = likes.user_id',
-    desc: "OUTER JOIN or OUTER LEFT and RIGHT with UNION (MySQL doesn't support FULL OUTER JOIN) retrieves all users and likes, matches them, and sets NULL on any like without a match on user, and vice versa with any user that has no matching like",
-  },
-  leftanti: {
-    query:
-      'SELECT users.name FROM users LEFT JOIN likes ON users.id = likes.user_id WHERE likes.user_id IS NULL;',
-    desc: 'LEFT ANTI JOIN finds users that have NO matching likes. It uses LEFT JOIN with a WHERE IS NULL clause to filter out all matches, keeping only the unmatched rows from the left table (users with no likes)',
-  },
+export const SQL_QUERIES: Record<JoinType, string> = {
+  inner:
+    'SELECT users.name, likes.like FROM users JOIN likes ON users.id = likes.user_id;',
+  left: 'SELECT users.name, likes.like FROM users LEFT JOIN likes ON users.id = likes.user_id;',
+  right:
+    'SELECT users.name, likes.like FROM users RIGHT JOIN likes ON users.id = likes.user_id;',
+  outer:
+    'SELECT users.name, likes.like FROM users LEFT OUTER JOIN likes ON users.id = likes.user_id\nUNION\nSELECT users.name, likes.like FROM users RIGHT OUTER JOIN likes ON users.id = likes.user_id',
+  leftanti:
+    'SELECT users.name FROM users LEFT JOIN likes ON users.id = likes.user_id WHERE likes.user_id IS NULL;',
 }
 
 /**

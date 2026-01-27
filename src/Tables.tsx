@@ -5,6 +5,7 @@ import {
   MODAL_TYPES,
   type ModalType,
 } from './constants'
+import { useI18n } from './i18n'
 import ModalAdd from './ModalAdd'
 import type { JoinType, Like, User } from './types'
 import getJoins from './utils/getJoins'
@@ -14,6 +15,7 @@ import getJoins from './utils/getJoins'
  * Allows interactive adding/removing of data to see how join results change
  */
 export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
+  const { t } = useI18n()
   const [users, setUsers] = useState<User[]>(INITIAL_USERS)
   const [likes, setLikes] = useState<Like[]>(INITIAL_LIKES)
   const [modalType, setModalType] = useState<ModalType | null>(null)
@@ -52,12 +54,12 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
       <div className="tables">
         {/* Users */}
         <div className="tables-col">
-          <h3>Users</h3>
+          <h3>{t.users}</h3>
           <table>
             <thead>
               <tr>
-                <th>ID</th>
-                <th className="user">Name</th>
+                <th>{t.id}</th>
+                <th className="user">{t.name}</th>
                 <th>&nbsp;</th>
               </tr>
             </thead>
@@ -68,7 +70,7 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
                   <td>{user.name}</td>
                   <td width="1">
                     <button
-                      aria-label="Remove user"
+                      aria-label={t.removeUser}
                       type="button"
                       className="button danger"
                       onClick={() => removeItem(MODAL_TYPES.USERS, user.uuid)}
@@ -81,23 +83,23 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
             </tbody>
           </table>
           <button
-            aria-label="Add user"
+            aria-label={t.addUser}
             className="button"
             type="button"
             onClick={() => setModalType(MODAL_TYPES.USERS)}
           >
-            Add
+            {t.add}
           </button>
         </div>
 
         {/* Join */}
         <div className="tables-col">
-          <h3>JOIN</h3>
+          <h3>{t.join}</h3>
           <table>
             <thead>
               <tr>
-                <th className="user">Name</th>
-                <th className="like">Like</th>
+                <th className="user">{t.name}</th>
+                <th className="like">{t.like}</th>
               </tr>
             </thead>
             <tbody>
@@ -117,12 +119,12 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
 
         {/* Likes */}
         <div className="tables-col">
-          <h3>Likes</h3>
+          <h3>{t.likes}</h3>
           <table>
             <thead>
               <tr>
-                <th>User ID</th>
-                <th className="like">Like</th>
+                <th>{t.userId}</th>
+                <th className="like">{t.like}</th>
               </tr>
             </thead>
             <tbody>
@@ -132,7 +134,7 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
                   <td>{like.like}</td>
                   <td width="1">
                     <button
-                      aria-label="Remove like"
+                      aria-label={t.removeLike}
                       type="button"
                       className="button danger"
                       onClick={() => removeItem(MODAL_TYPES.LIKES, like.uuid)}
@@ -145,12 +147,12 @@ export default function Tables({ currentJoin }: { currentJoin: JoinType }) {
             </tbody>
           </table>
           <button
-            aria-label="Add like"
+            aria-label={t.addLike}
             className="button"
             type="button"
             onClick={() => setModalType(MODAL_TYPES.LIKES)}
           >
-            Add
+            {t.add}
           </button>
         </div>
       </div>
