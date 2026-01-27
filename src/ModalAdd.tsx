@@ -1,6 +1,7 @@
 import type { JSX } from 'preact'
 import { useState } from 'preact/hooks'
 import { MODAL_TYPES, type ModalType } from './constants'
+import { useI18n } from './i18n'
 import type { Like, User } from './types'
 
 export default function ModalAdd({
@@ -16,6 +17,7 @@ export default function ModalAdd({
   closeModal: () => void
   defaultId: number
 }) {
+  const { t } = useI18n()
   const [addId, setAddId] = useState(String(defaultId))
   const [addName, setAddName] = useState('')
 
@@ -49,7 +51,7 @@ export default function ModalAdd({
           step="1"
           value={addId}
           onInput={(e) => setAddId(e.currentTarget.value)}
-          placeholder="ID"
+          placeholder={t.id}
           className="input-sm"
         />
         <input
@@ -58,10 +60,10 @@ export default function ModalAdd({
           pattern=".*\S.*"
           value={addName}
           onInput={(e) => setAddName(e.currentTarget.value)}
-          placeholder={modalType === MODAL_TYPES.LIKES ? 'Like' : 'Name'}
+          placeholder={modalType === MODAL_TYPES.LIKES ? t.like : t.name}
         />
         <button className="button" type="submit">
-          Add
+          {t.add}
         </button>
       </form>
     </div>

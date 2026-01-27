@@ -1,3 +1,5 @@
+import { useI18n } from './i18n'
+
 const width = 112.5
 const height = 75
 const centerY = height / 2
@@ -12,10 +14,11 @@ const strokeWidth = 1.5
 
 // Simple Venn-style SVGs for JOIN types
 export const InnerJoinSVG = () => {
+  const { t } = useI18n()
   // Fill only the intersection using SVG mask, always red
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-      <title>Inner join</title>
+      <title>{t.innerJoinTitle}</title>
       <defs>
         <clipPath id="clip1">
           <circle cx={centerX1} cy={centerY} r={radius} />
@@ -52,9 +55,10 @@ export const InnerJoinSVG = () => {
 }
 
 export const LeftJoinSVG = () => {
+  const { t } = useI18n()
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-      <title>Left join</title>
+      <title>{t.leftJoinTitle}</title>
       <circle cx={centerX1} cy={centerY} r={radius} fill={fillColor} />
       {/* Borders always on top */}
       <circle
@@ -78,9 +82,10 @@ export const LeftJoinSVG = () => {
 }
 
 export const RightJoinSVG = () => {
+  const { t } = useI18n()
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-      <title>Right join</title>
+      <title>{t.rightJoinTitle}</title>
       <circle cx={centerX2} cy={centerY} r={radius} fill={fillColor} />
       {/* Borders always on top */}
       <circle
@@ -104,9 +109,10 @@ export const RightJoinSVG = () => {
 }
 
 export const OuterJoinSVG = () => {
+  const { t } = useI18n()
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-      <title>Outer join</title>
+      <title>{t.outerJoinTitle}</title>
       <circle cx={centerX1} cy={centerY} r={radius} fill={fillColor} />
       <circle cx={centerX2} cy={centerY} r={radius} fill={fillColor} />
       {/* Borders always on top */}
@@ -131,9 +137,10 @@ export const OuterJoinSVG = () => {
 }
 
 export const LeftAntiJoinSVG = () => {
+  const { t } = useI18n()
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-      <title>Left anti join</title>
+      <title>{t.leftAntiJoinTitle}</title>
       <defs>
         <mask id="leftAntiMask">
           <rect width={width} height={height} fill="white" />
