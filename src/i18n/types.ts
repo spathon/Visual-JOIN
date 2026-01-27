@@ -54,13 +54,14 @@ export interface Translations {
   language: string
 }
 
-export type Locale = 'en' | 'es' | 'fr' | 'de'
+export type Locale = 'en' | 'es' | 'fr' | 'de' | 'sv'
 
 export const LOCALES: Record<Locale, string> = {
   en: 'English',
   es: 'Español',
   fr: 'Français',
   de: 'Deutsch',
+  sv: 'Svenska',
 }
 
 export const DEFAULT_LOCALE: Locale = 'en'
