@@ -47,7 +47,6 @@ function JoinsApp() {
 
   const selectJoin = (join: JoinType) => {
     setCurrentJoin(join)
-    setShowDesc(false)
   }
 
   return (
