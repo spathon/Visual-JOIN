@@ -7,9 +7,9 @@ const margin = 1 // for stroke
 const centerX1 = 37.5 // 1/3 of width
 const centerX2 = 75 // 2/3 of width
 const radius = Math.min(centerX1, height / 2) - margin // maximize radius to fill viewBox
-const fillColor = '#CC333F'
-const strokeColorLeft = '#00A0B0'
-const strokeColorRight = '#EB6841'
+const fillColor = 'var(--svg-fill)'
+const strokeColorLeft = 'var(--svg-stroke-left)'
+const strokeColorRight = 'var(--svg-stroke-right)'
 const strokeWidth = 1.5
 
 // Simple Venn-style SVGs for JOIN types

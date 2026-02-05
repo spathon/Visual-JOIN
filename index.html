@@ -19,7 +19,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7N1M7E4XTY"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(...args){dataLayer.push(args);}
+      function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'G-7N1M7E4XTY');
@@ -27,6 +27,13 @@
     <link rel="stylesheet" href="/src/styles.css">
   </head>
   <body>
+    <script>
+      (() => {
+        var s = localStorage.getItem('visual-join-theme');
+        var t = s === 'light' || s === 'dark' ? s : (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
     <div id="root" class="container"></div>
     <script prerender type="module" src="/src/main.tsx"></script>
   </body>

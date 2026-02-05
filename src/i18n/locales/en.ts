@@ -59,6 +59,9 @@ const en: Translations = {
 
   // Language
   language: 'Language',
+
+  // Theme
+  toggleTheme: 'Toggle theme',
 }
 
 export default en

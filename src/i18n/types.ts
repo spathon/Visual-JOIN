@@ -52,6 +52,9 @@ export interface Translations {
 
   // Language
   language: string
+
+  // Theme
+  toggleTheme: string
 }
 
 export type Locale = 'en' | 'es' | 'fr' | 'de' | 'sv'
