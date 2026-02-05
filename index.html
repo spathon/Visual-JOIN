@@ -27,6 +27,13 @@
     <link rel="stylesheet" href="/src/styles.css">
   </head>
   <body>
+    <script>
+      (() => {
+        var s = localStorage.getItem('visual-join-theme');
+        var t = s === 'light' || s === 'dark' ? s : (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
     <div id="root" class="container"></div>
     <script prerender type="module" src="/src/main.tsx"></script>
   </body>

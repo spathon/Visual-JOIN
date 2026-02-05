@@ -60,6 +60,9 @@ const de: Translations = {
 
   // Language
   language: 'Sprache',
+
+  // Theme
+  toggleTheme: 'Design wechseln',
 }
 
 export default de

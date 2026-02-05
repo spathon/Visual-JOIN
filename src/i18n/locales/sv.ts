@@ -60,6 +60,9 @@ const sv: Translations = {
 
   // Language
   language: 'Språk',
+
+  // Theme
+  toggleTheme: 'Byt tema',
 }
 
 export default sv

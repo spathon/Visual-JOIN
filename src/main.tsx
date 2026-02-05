@@ -1,12 +1,15 @@
 import { hydrate, prerender as ssr } from 'preact-iso'
 import { I18nProvider } from './i18n'
 import JoinsApp from './JoinsApp'
+import { ThemeProvider } from './theme'
 
 function App() {
   return (
-    <I18nProvider>
-      <JoinsApp />
-    </I18nProvider>
+    <ThemeProvider>
+      <I18nProvider>
+        <JoinsApp />
+      </I18nProvider>
+    </ThemeProvider>
   )
 }
 

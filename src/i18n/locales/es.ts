@@ -60,6 +60,9 @@ const es: Translations = {
 
   // Language
   language: 'Idioma',
+
+  // Theme
+  toggleTheme: 'Cambiar tema',
 }
 
 export default es
