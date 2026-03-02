@@ -3,7 +3,7 @@ import type { Translations } from '../types'
 const en: Translations = {
   // Header
   title: 'Visual JOIN',
-  subtitle: 'Understand how joins work by interacting and see it visually',
+  subtitle: 'Understand how joins work by interacting and seeing it visually',
 
   // Join types
   innerJoin: 'INNER JOIN',
