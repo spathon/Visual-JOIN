@@ -4,8 +4,8 @@ import { useContext, useEffect, useState } from 'preact/hooks'
 import en from './locales/en'
 import {
   DEFAULT_LOCALE,
-  SUPPORTED_LOCALES,
   type Locale,
+  SUPPORTED_LOCALES,
   type Translations,
 } from './types'
 
@@ -45,7 +45,7 @@ async function loadLocale(locale: Locale): Promise<Translations> {
 function getSavedLocale(): Locale {
   if (typeof window === 'undefined') return DEFAULT_LOCALE
   const saved = localStorage.getItem(STORAGE_KEY)
-  if (saved && SUPPORTED_LOCALES.includes(saved as Locale)) {
+  if (saved && (SUPPORTED_LOCALES as readonly string[]).includes(saved)) {
     return saved as Locale
   }
   const browserLang = navigator.language.slice(0, 2)

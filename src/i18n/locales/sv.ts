@@ -22,7 +22,7 @@ const sv: Translations = {
   innerJoinDesc:
     'INNER JOIN eller bara JOIN hämtar alla användare och likes som matchar varandra (där id-fältet i users matchar ett user_id i likes-tabellen och vice versa)',
   leftJoinDesc:
-    'LEFT JOIN hämtar alla användare och dess likes. Om liken inte finns sätts NULL i like-fältet',
+    'LEFT JOIN hämtar alla användare och deras likes. Om liken inte finns sätts NULL i like-fältet',
   leftAntiJoinDesc:
     'LEFT ANTI JOIN hittar användare som INTE har några matchande likes. Den använder LEFT JOIN med en WHERE IS NULL-klausul för att filtrera bort alla matchningar och behåller endast de omatchade raderna från vänster tabell (användare utan likes)',
   rightJoinDesc:
