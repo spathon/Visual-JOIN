@@ -2,7 +2,12 @@ import type { ComponentChildren } from 'preact'
 import { createContext } from 'preact'
 import { useContext, useEffect, useState } from 'preact/hooks'
 import en from './locales/en'
-import { DEFAULT_LOCALE, type Locale, type Translations } from './types'
+import {
+  DEFAULT_LOCALE,
+  SUPPORTED_LOCALES,
+  type Locale,
+  type Translations,
+} from './types'
 
 const STORAGE_KEY = 'visual-join-locale'
 
@@ -40,9 +45,12 @@ async function loadLocale(locale: Locale): Promise<Translations> {
 function getSavedLocale(): Locale {
   if (typeof window === 'undefined') return DEFAULT_LOCALE
   const saved = localStorage.getItem(STORAGE_KEY)
-  if (saved && ['en', 'es', 'fr', 'de', 'sv'].includes(saved)) {
+  if (saved && SUPPORTED_LOCALES.includes(saved as Locale)) {
     return saved as Locale
   }
+  const browserLang = navigator.language.slice(0, 2)
+  const match = SUPPORTED_LOCALES.find((l) => l === browserLang)
+  if (match) return match
   return DEFAULT_LOCALE
 }
 

@@ -4,7 +4,7 @@ const sv: Translations = {
   // Header
   title: 'Visual JOIN',
   subtitle:
-    'Forstå hur joins fungerar genom att interagera och se det visuellt',
+    'Förstå hur joins fungerar genom att interagera och se det visuellt',
 
   // Join types
   innerJoin: 'INNER JOIN',
