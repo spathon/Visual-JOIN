@@ -29,6 +29,8 @@ async function loadLocale(locale: Locale): Promise<Translations> {
       return (await import('./locales/de')).default
     case 'sv':
       return (await import('./locales/sv')).default
+    case 'pt':
+      return (await import('./locales/pt')).default
     default:
       return en
   }
@@ -40,7 +42,7 @@ async function loadLocale(locale: Locale): Promise<Translations> {
 function getSavedLocale(): Locale {
   if (typeof window === 'undefined') return DEFAULT_LOCALE
   const saved = localStorage.getItem(STORAGE_KEY)
-  if (saved && ['en', 'es', 'fr', 'de', 'sv'].includes(saved)) {
+  if (saved && ['en', 'es', 'fr', 'de', 'sv', 'pt'].includes(saved)) {
     return saved as Locale
   }
   return DEFAULT_LOCALE
