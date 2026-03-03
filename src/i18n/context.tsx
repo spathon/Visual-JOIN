@@ -34,6 +34,8 @@ async function loadLocale(locale: Locale): Promise<Translations> {
       return (await import('./locales/de')).default
     case 'sv':
       return (await import('./locales/sv')).default
+    case 'pt':
+      return (await import('./locales/pt')).default
     default:
       return en
   }
