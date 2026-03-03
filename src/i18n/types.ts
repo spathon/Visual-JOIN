@@ -57,7 +57,9 @@ export interface Translations {
   toggleTheme: string
 }
 
-export type Locale = 'en' | 'es' | 'fr' | 'de' | 'sv' | 'pt'
+export const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'de', 'sv', 'pt'] as const
+
+export type Locale = (typeof SUPPORTED_LOCALES)[number]
 
 export const LOCALES: Record<Locale, string> = {
   en: 'English',
