@@ -8,7 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "biome check",
-    "format": "biome format"
+    "format": "biome format",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run lint && npm run typecheck"
   },
   "keywords": [],
   "author": "",

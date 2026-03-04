@@ -25,20 +25,12 @@ const I18nContext = createContext<I18nContextValue | null>(null)
  * Each locale is a separate chunk loaded on demand
  */
 async function loadLocale(locale: Locale): Promise<Translations> {
-  switch (locale) {
-    case 'es':
-      return (await import('./locales/es')).default
-    case 'fr':
-      return (await import('./locales/fr')).default
-    case 'de':
-      return (await import('./locales/de')).default
-    case 'sv':
-      return (await import('./locales/sv')).default
-    case 'pt':
-      return (await import('./locales/pt')).default
-    default:
-      return en
-  }
+  if (locale === DEFAULT_LOCALE) return en
+  if (!SUPPORTED_LOCALES.includes(locale)) return en
+  const module: { default: Translations } = await import(
+    `./locales/${locale}.ts`
+  )
+  return module.default
 }
 
 /**
