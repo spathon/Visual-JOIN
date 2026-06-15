@@ -23,9 +23,9 @@
   "type": "module",
   "devDependencies": {
     "@biomejs/biome": "~2.4.5",
-    "@preact/preset-vite": "^2.10.2",
+    "@preact/preset-vite": "^2.10.5",
     "baseline-browser-mapping": "^2.9.11",
     "typescript": "^5.9.2",
-    "vite": "^7.2.2"
+    "vite": "^8.0.16"
   }
 }
