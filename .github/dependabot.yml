@@ -1,0 +1,21 @@
+version: 2
+updates:
+  # Keep GitHub Actions up to date — without this ecosystem entry, Dependabot
+  # only ever opens security PRs and Actions silently drift majors behind.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ['*']
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      # One PR for routine bumps; majors stay separate so they get reviewed.
+      dependencies:
+        patterns: ['*']
+        update-types: [minor, patch]
