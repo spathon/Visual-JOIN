@@ -1,14 +1,14 @@
 {
   "name": "visual-join",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Understand how SQL joins work by interacting and seeing it visually",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "biome check",
-    "format": "biome format",
+    "format": "biome format --write",
     "typecheck": "tsc --noEmit",
     "test": "npm run lint && npm run typecheck"
   },
@@ -22,10 +22,10 @@
   },
   "type": "module",
   "devDependencies": {
-    "@biomejs/biome": "~2.4.5",
+    "@biomejs/biome": "~2.5.7",
     "@preact/preset-vite": "^2.10.5",
-    "baseline-browser-mapping": "^2.9.11",
-    "typescript": "^5.9.2",
+    "baseline-browser-mapping": "^2.11.12",
+    "typescript": "^7.0.2",
     "vite": "^8.0.16"
   }
 }
