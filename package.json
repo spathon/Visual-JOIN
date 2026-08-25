@@ -22,10 +22,10 @@
   },
   "type": "module",
   "devDependencies": {
-    "@biomejs/biome": "~2.5.8",
+    "@biomejs/biome": "~2.5.10",
     "@preact/preset-vite": "^2.10.5",
-    "baseline-browser-mapping": "^2.11.14",
+    "baseline-browser-mapping": "^2.11.17",
     "typescript": "^7.0.2",
-    "vite": "^8.2.1"
+    "vite": "^8.2.2"
   }
 }
