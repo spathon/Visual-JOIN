@@ -16,7 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "preact": "^10.27.2",
+    "preact": "^11.0.0",
     "preact-iso": "^2.12.2",
     "preact-render-to-string": "^6.6.1"
   },
