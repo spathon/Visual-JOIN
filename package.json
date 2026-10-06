@@ -18,14 +18,14 @@
   "dependencies": {
     "preact": "^11.0.0",
     "preact-iso": "^2.12.2",
-    "preact-render-to-string": "^6.6.1"
+    "preact-render-to-string": "^6.8.0"
   },
   "type": "module",
   "devDependencies": {
-    "@biomejs/biome": "~2.5.14",
+    "@biomejs/biome": "~2.5.15",
     "@preact/preset-vite": "^2.10.5",
-    "baseline-browser-mapping": "^2.11.26",
+    "baseline-browser-mapping": "^2.11.27",
     "typescript": "^7.0.2",
-    "vite": "^8.3.1"
+    "vite": "^8.3.2"
   }
 }
