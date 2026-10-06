@@ -1,4 +1,4 @@
-import type { JSX } from 'preact'
+import type { TargetedSubmitEvent } from 'preact'
 import { useState } from 'preact/hooks'
 import { MODAL_TYPES, type ModalType } from './constants'
 import { useI18n } from './i18n'
@@ -21,7 +21,7 @@ export default function ModalAdd({
   const [addId, setAddId] = useState(String(defaultId))
   const [addName, setAddName] = useState('')
 
-  const addItem = (e: JSX.TargetedEvent<HTMLFormElement, Event>) => {
+  const addItem = (e: TargetedSubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const parsedId = Number(addId)

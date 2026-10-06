@@ -383,7 +383,7 @@ input[type="number"] {
 .is-null {
   color: var(--color-null);
 }
-.is-not-selected td {
+.tables tr.is-not-selected td {
   text-decoration: line-through;
   color: var(--color-not-selected);
   font-weight: 300;
