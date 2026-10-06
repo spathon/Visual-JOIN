@@ -22,15 +22,17 @@ const I18nContext = createContext<I18nContextValue | null>(null)
 
 /**
  * Lazy load locale translations
- * Each locale is a separate chunk loaded on demand
+ * Each locale is a separate chunk loaded on demand. English is excluded
+ * because it is imported statically as the default.
  */
+const localeLoaders = import.meta.glob<Translations>(
+  ['./locales/*.ts', '!./locales/en.ts'],
+  { import: 'default' },
+)
+
 async function loadLocale(locale: Locale): Promise<Translations> {
-  if (locale === DEFAULT_LOCALE) return en
-  if (!SUPPORTED_LOCALES.includes(locale)) return en
-  const module: { default: Translations } = await import(
-    `./locales/${locale}.ts`
-  )
-  return module.default
+  const load = localeLoaders[`./locales/${locale}.ts`]
+  return load ? load() : en
 }
 
 /**
