@@ -16,7 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "preact": "^11.0.0",
+    "preact": "^11.0.1",
     "preact-iso": "^2.12.2",
     "preact-render-to-string": "^6.8.0"
   },
@@ -24,8 +24,8 @@
   "devDependencies": {
     "@biomejs/biome": "~2.5.15",
     "@preact/preset-vite": "^2.10.5",
-    "baseline-browser-mapping": "^2.11.27",
+    "baseline-browser-mapping": "^2.11.28",
     "typescript": "^7.0.2",
-    "vite": "^8.3.3"
+    "vite": "^8.3.4"
   }
 }
