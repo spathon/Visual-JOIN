@@ -16,16 +16,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "preact": "^11.0.1",
+    "preact": "^11.0.2",
     "preact-iso": "^2.12.2",
     "preact-render-to-string": "^6.8.1"
   },
   "type": "module",
   "devDependencies": {
-    "@biomejs/biome": "~2.5.15",
+    "@biomejs/biome": "~2.6.2",
     "@preact/preset-vite": "^2.10.5",
-    "baseline-browser-mapping": "^2.11.29",
+    "baseline-browser-mapping": "^2.11.32",
     "typescript": "^7.0.2",
-    "vite": "^8.3.4"
+    "vite": "^8.3.5"
   }
 }
