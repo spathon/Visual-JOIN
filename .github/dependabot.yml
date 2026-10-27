@@ -8,7 +8,7 @@ updates:
       interval: weekly
     groups:
       actions:
-        patterns: ['*']
+        patterns: ["*"]
 
   - package-ecosystem: npm
     directory: /
@@ -17,5 +17,5 @@ updates:
     groups:
       # One PR for routine bumps; majors stay separate so they get reviewed.
       dependencies:
-        patterns: ['*']
+        patterns: ["*"]
         update-types: [minor, patch]
