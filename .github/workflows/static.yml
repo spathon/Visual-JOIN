@@ -37,7 +37,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24'
+          node-version: "24"
 
       - name: Install dependencies
         run: npm ci
@@ -49,7 +49,7 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           # Upload the build output
-          path: 'dist'
+          path: "dist"
 
       - name: Deploy to GitHub Pages
         id: deployment
